@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Infografis Data Warga SAPA RT 09</title>
+
+<!-- Font Awesome 6.5 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- Google Fonts: Plus Jakarta Sans & Poppins -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Chart.js & Plugin DataLabels CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+<style>
+:root {
+  --bri-navy: #002D58;
+  --bri-blue-dark: #003865;
+  --bri-blue: #00529C;
+  --bri-blue-light: #1072BA;
+  --bri-accent-orange: #FF6B00;
+  --bri-orange-soft: #FFF2EA;
+  --bri-green: #108981;
+  --bri-green-soft: #E6F4EA;
+  --bg-canvas: #F2F5F9;
+  --card-bg: #FFFFFF;
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+  --border-color: #E2E8F0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 0;
+}
+
+/* Base Container */
+.app-container {
+  width: 100%;
+  max-width: 100%;
+  background: var(--bg-canvas);
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+/* Header Banner dengan Statistik Menyatu di Dalamnya */
+.app-header {
+  background: linear-gradient(135deg, var(--bri-navy) 0%, var(--bri-blue) 100%);
+  color: white;
+  padding: 24px 20px 24px 20px;
+  border-radius: 0 0 28px 28px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.greeting-text {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.greeting-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.sync-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #10B981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #10B981;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* TEKS ANGKA, IKON & JUDUL RATA TENGAH SIMETRIS */
+.header-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.stat-num {
+  font-size: 26px;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 4px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.stat-label i {
+  font-size: 14px;
+}
+
+/* Content Area Layout */
+.content-section {
+  padding: 20px 16px 0 16px;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--bri-navy);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Accordion Styling */
+.category-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.category-item {
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  touch-action: manipulation;
+}
+
+.category-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  background: #FFFFFF;
+  transition: background 0.25s;
+}
+
+.category-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  padding-right: 10px;
+}
+
+.category-icon-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(0, 82, 156, 0.06);
+  color: var(--bri-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.category-text-box h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+
+.category-text-box span {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 2px;
+  display: block;
+}
+
+.toggle-arrow {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-canvas);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.category-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #FAFAFA;
+  border-top: 1px solid transparent;
+  padding: 0 16px;
+}
+
+/* Active State for Accordion */
+.category-item.active {
+  border-color: var(--bri-blue);
+  box-shadow: 0 4px 16px rgba(0, 82, 156, 0.08);
+}
+.category-item.active .category-header {
+  background: #F8FAFC;
+}
+.category-item.active .category-icon-badge {
+  background: var(--bri-blue);
+  color: white;
+}
+.category-item.active .toggle-arrow {
+  transform: rotate(180deg);
+  background: var(--bri-blue);
+  color: white;
+}
+.category-item.active .category-body {
+  max-height: 1200px;
+  padding: 16px;
+  border-top-color: var(--border-color);
+}
+
+/* Chart & Table Box Styling */
+.chart-box {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 14px;
+}
+.chart-box:last-child {
+  margin-bottom: 0;
+}
+.chart-box h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--bri-navy);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Custom Table */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #FFFFFF;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 12.5px;
+  border: 1px solid var(--border-color);
+}
+.custom-table th {
+  background-color: #F1F5F9;
+  color: var(--bri-navy);
+  font-weight: 700;
+  text-align: left;
+  padding: 10px 12px;
+}
+.custom-table td {
+  padding: 10px 12px;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+
+/* Benefit List Cards */
+.benefit-item {
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.benefit-item:last-child {
+  margin-bottom: 0;
+}
+.benefit-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.benefit-metrics {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.badge-count {
+  background-color: rgba(0, 82, 156, 0.08);
+  color: var(--bri-blue);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.badge-percent {
+  background-color: var(--bri-green-soft);
+  color: #067A4B;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 12px;
+  border: 1px solid #B7EBC9;
+}
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  padding: 30px 16px 10px 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: var(--bri-navy);
+  margin-bottom: 4px;
+}
+
+/* Responsive PC Layout */
+.inner-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 768px) {
+  body {
+    padding: 30px 20px;
+  }
+  .app-container {
+    max-width: 1080px;
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(0, 56, 101, 0.08);
+    overflow: hidden;
+  }
+  .app-header {
+    padding: 32px 36px 28px 36px;
+    border-radius: 24px 24px 0 0;
+  }
+  .greeting-name {
+    font-size: 24px;
+  }
+  .stat-num {
+    font-size: 32px;
+  }
+  .content-section {
+    padding: 24px 36px 0 36px;
+  }
+  .category-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .category-item.full-width-pc {
+    grid-column: span 2;
+  }
+  .inner-grid-2col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1200px) {
+  .app-container {
+    max-width: 1140px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Top Header Banner -->
+  <div class="app-header">
+    <div class="header-top">
+      <div class="header-left">
+        <div class="greeting-text">Infografis Real-Time</div>
+        <div class="greeting-name">Data Kependudukan</div>
+      </div>
+      <div class="sync-badge">
+        <div class="pulse-dot"></div>
+        <span id="lastSync">Syncing...</span>
+      </div>
+    </div>
+
+    <div class="header-stats">
+      <div class="stat-item">
+        <div class="stat-num" id="valKK">0</div>
+        <div class="stat-label">
+          <i class="fa-solid fa-house-user" style="color: #FFD166;"></i> Total KK
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="valJiwa">0</div>
+        <div class="stat-label">
+          <i class="fa-solid fa-people-group" style="color: #6EE7B7;"></i> Total Jiwa
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="content-section">
+    <div class="section-title">
+      <span>Kategori Data Infografis</span>
+      <span style="font-size: 12px; font-weight: 600; color: var(--bri-blue);">4 Kategori Utama</span>
+    </div>
+
+    <!-- Accordion Category List -->
+    <div class="category-list">
+      <!-- Kategori 1: Informasi Data Warga -->
+      <div class="category-item active full-width-pc">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <div class="category-title-group">
+            <div class="category-icon-badge">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="category-text-box">
+              <h2>Data Demografi</h2>
+              <span>Jender dan Status Domisili</span>
+            </div>
+          </div>
+          <div class="toggle-arrow">
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="category-body">
+          <div class="inner-grid-2col">
+            <!-- Donut Chart Gender -->
+            <div class="chart-box">
+              <h4><i class="fa-solid fa-venus-mars" style="color: var(--bri-blue);"></i> Komposisi Jenis Kelamin</h4>
+              <div style="height: 220px; position: relative;">
+                <canvas id="genderChart"></canvas>
+              </div>
+            </div>
+            <!-- Table Status Warga (3 Kolom: Status, KK, Jiwa) -->
+            <div class="chart-box">
+              <h4><i class="fa-solid fa-address-card" style="color: var(--bri-blue);"></i> Rincian Status Domisili</h4>
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Jenis Status</th>
+                    <th style="text-align: right;">KK</th>
+                    <th style="text-align: right;">Jiwa</th>
+                  </tr>
+                </thead>
+                <tbody id="tableStatusBody">
+                  <tr><td colspan="3" style="text-align:center;">Memuat data...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kategori 2: Informasi Warga Prioritas -->
+      <div class="category-item">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <div class="category-title-group">
+            <div class="category-icon-badge">
+              <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <div class="category-text-box">
+              <h2>Warga Prioritas</h2>
+              <span>Disabilitas, Lansia, Balita, dll.</span>
+            </div>
+          </div>
+          <div class="toggle-arrow">
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="category-body">
+          <div class="chart-box">
+            <h4><i class="fa-solid fa-chart-column" style="color: var(--bri-accent-orange);"></i> Jumlah Warga Prioritas</h4>
+            <div style="height: 240px; position: relative;">
+              <canvas id="prioritasChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kategori 3: Informasi Penerima Manfaat -->
+      <div class="category-item">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <div class="category-title-group">
+            <div class="category-icon-badge">
+              <i class="fa-solid fa-hand-holding-heart"></i>
+            </div>
+            <div class="category-text-box">
+              <h2>Penerima Manfaat</h2>
+              <span>Pelayanan dan Bantuan Sosial</span>
+            </div>
+          </div>
+          <div class="toggle-arrow">
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="category-body">
+          <div id="penerimaList">
+            <p class="text-muted" style="font-size: 12px;">Memuat data...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kategori 4: Informasi Jenjang Pendidikan -->
+      <div class="category-item full-width-pc">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <div class="category-title-group">
+            <div class="category-icon-badge">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="category-text-box">
+              <h2>Jenjang Pendidikan</h2>
+              <span>Distribusi Pendidikan Terakhir Warga</span>
+            </div>
+          </div>
+          <div class="toggle-arrow">
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="category-body">
+          <div class="chart-box">
+            <h4><i class="fa-solid fa-chart-bar" style="color: var(--bri-green);"></i> Distribusi Tingkat Pendidikan</h4>
+            <div style="height: 250px; position: relative;">
+              <canvas id="pendidikanChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Footer -->
+  <div class="app-footer">
+    <div class="footer-logo">
+      <i class="fa-solid fa-shield-halved" style="color: var(--bri-blue);"></i> MySAPA
+    </div>
+    <div>Sistem Informasi & Pelayanan Administrasi</div>
+    <div style="margin-top: 4px; opacity: 0.7;">Powered by Anto Design Concept &copy; 2026</div>
+  </div>
+</div>
+
+<script>
+Chart.register(ChartDataLabels);
+let chartGender = null;
+let chartPrioritas = null;
+let chartPendidikan = null;
+let totalKKGlobal = 1;
+
+function toggleCategory(headerEl) {
+  const currentItem = headerEl.parentElement;
+  const allItems = document.querySelectorAll('.category-item');
+  allItems.forEach(item => {
+    if (item !== currentItem) {
+      item.classList.remove('active');
+    }
+  });
+  currentItem.classList.toggle('active');
+  setTimeout(() => {
+    if (chartGender) chartGender.resize();
+    if (chartPrioritas) chartPrioritas.resize();
+    if (chartPendidikan) chartPendidikan.resize();
+  }, 300);
+}
+
+// Fungsi pembantu untuk mengubah teks string menjadi angka secara aman
+function cleanNumber(val) {
+  if (val === null || val === undefined) return 0;
+  const str = String(val).trim();
+  if (str === "") return 0;
+  const num = Number(str.replace(/[^0-9.-]+/g, ""));
+  return isNaN(num) ? 0 : num;
+}
+
+const API_URL =
+  'https://script.google.com/macros/s/AKfycbzUSsFLjLO31A84Az13zVa2khU3r-HHBW6jYZFKLpfMr2kdz1icy9xb2Y6lfEUIAQG3/exec';
+
+function fetchSheetData() {
+  fetch(API_URL + '?api=rekap')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('HTTP ' + response.status);
+      }
+      return response.json();
+    })
+    .then(response => {
+      renderData(response);
+    })
+    .catch(error => {
+      console.error(
+        'Gagal mengambil data:',
+        error
+      );
+      document.getElementById(
+        'lastSync'
+      ).innerText = 'Gagal Sync';
+    });
+}
+
+function renderData(response) {
+  if (!response) {
+    document.getElementById('lastSync').innerText = 'Respon Kosong';
+    return;
+  }
+  
+  if (!response.success) {
+    console.error("Error Apps Script:", response.message);
+    document.getElementById('lastSync').innerText = 'Err: ' + (response.message || 'Gagal');
+    return;
+  }
+  
+  if (!response.data || response.data.length <= 1) {
+    document.getElementById('lastSync').innerText = 'Data Kosong';
+    return;
+  }
+
+  document.getElementById('lastSync').innerText = 'Sync: ' + response.updatedAt;
+  
+  const rows = response.data;
+  let totalKK = 0;
+  let totalJiwa = 0;
+  let genderLabels = [], genderData = [];
+  let statusList = [];
+  let prioritasLabels = [], prioritasData = [];
+  let penerimaList = [];
+  let pendidikanLabels = [], pendidikanData = [];
+
+  for (let i = 1; i < rows.length; i++) {
+    const r = rows[i];
+    if (!r) continue;
+
+    const kkVal = cleanNumber(r[1]);
+    const jiwaVal = cleanNumber(r[2]);
+
+    totalKK += kkVal;
+    totalJiwa += jiwaVal;
+
+    // Rincian Status Domisili (Kolom A, B, C)
+    if (r[0] && String(r[0]).trim() !== "") {
+      statusList.push({ status: String(r[0]), kk: kkVal, jiwa: jiwaVal });
+    }
+    // Gender (Kolom D, E)
+    if (r[3] && String(r[3]).trim() !== "") {
+      genderLabels.push(String(r[3]));
+      genderData.push(cleanNumber(r[4]));
+    }
+    // Pendidikan (Kolom F, G)
+    if (r[5] && String(r[5]).trim() !== "") {
+      pendidikanLabels.push(String(r[5]));
+      pendidikanData.push(cleanNumber(r[6]));
+    }
+    // Warga Prioritas (Kolom H, I)
+    if (r[7] && String(r[7]).trim() !== "") {
+      prioritasLabels.push(String(r[7]));
+      prioritasData.push(cleanNumber(r[8]));
+    }
+    // Penerima Manfaat (Kolom J, K)
+    if (r[9] && String(r[9]).trim() !== "") {
+      penerimaList.push({ kategori: String(r[9]), jumlah: cleanNumber(r[10]) });
+    }
+  }
+
+  totalKKGlobal = totalKK > 0 ? totalKK : 1;
+  document.getElementById('valKK').innerText = totalKK.toLocaleString('id-ID');
+  document.getElementById('valJiwa').innerText = totalJiwa.toLocaleString('id-ID');
+
+  renderGenderChart(genderLabels, genderData);
+  renderStatusTable(statusList);
+  renderPrioritasChart(prioritasLabels, prioritasData);
+  renderPenerimaManfaat(penerimaList);
+  renderPendidikanChart(pendidikanLabels, pendidikanData);
+}
+
+function renderGenderChart(labels, data) {
+  const ctx = document.getElementById('genderChart').getContext('2d');
+  if (chartGender) {
+    chartGender.data.labels = labels;
+    chartGender.data.datasets[0].data = data;
+    chartGender.update();
+    return;
+  }
+  chartGender = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: data,
+        backgroundColor: ['#00529C', '#FF6B00', '#1072BA', '#EC4899'],
+        borderWidth: 2,
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right', labels: { font: { family: 'Plus Jakarta Sans', size: 11 } } },
+        datalabels: {
+          color: '#ffffff',
+          font: { family: 'Plus Jakarta Sans', weight: 'bold', size: 12 },
+          formatter: (value) => value > 0 ? value.toLocaleString('id-ID') : ''
+        }
+      }
+    }
+  });
+}
+
+function renderStatusTable(list) {
+  const tbody = document.getElementById('tableStatusBody');
+  if (list.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;">Data tidak tersedia</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list.map(item => `
+    <tr>
+      <td><strong>${item.status}</strong></td>
+      <td style="text-align: right; font-weight: 700; color: var(--bri-blue);">${Number(item.kk).toLocaleString('id-ID')}</td>
+      <td style="text-align: right; font-weight: 700; color: var(--bri-green);">${Number(item.jiwa).toLocaleString('id-ID')}</td>
+    </tr>
+  `).join('');
+}
+
+function renderPrioritasChart(labels, data) {
+  const ctx = document.getElementById('prioritasChart').getContext('2d');
+  if (chartPrioritas) {
+    chartPrioritas.data.labels = labels;
+    chartPrioritas.data.datasets[0].data = data;
+    chartPrioritas.update();
+    return;
+  }
+  chartPrioritas = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Jumlah Warga',
+        data: data,
+        backgroundColor: '#FF6B00',
+        borderRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end',
+          align: 'top',
+          color: '#1E293B',
+          font: { family: 'Plus Jakarta Sans', weight: 'bold', size: 11 },
+          formatter: (value) => value.toLocaleString('id-ID')
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { precision: 0 },
+          grace: '18%'
+        }
+      }
+    }
+  });
+}
+
+function renderPenerimaManfaat(list) {
+  const container = document.getElementById('penerimaList');
+  if (list.length === 0) {
+    container.innerHTML = '<p class="text-muted" style="font-size: 12px;">Data tidak tersedia</p>';
+    return;
+  }
+  container.innerHTML = list.map(item => {
+    const percentage = ((item.jumlah / totalKKGlobal) * 100).toFixed(1);
+    return `
+      <div class="benefit-item">
+        <div class="benefit-title">
+          <i class="fa-solid fa-ribbon" style="color: var(--bri-blue);"></i>
+          <span>${item.kategori}</span>
+        </div>
+        <div class="benefit-metrics">
+          <span class="badge-count">${item.jumlah} KK</span>
+          <span class="badge-percent">${percentage}% KK</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderPendidikanChart(labels, data) {
+  const ctx = document.getElementById('pendidikanChart').getContext('2d');
+  if (chartPendidikan) {
+    chartPendidikan.data.labels = labels;
+    chartPendidikan.data.datasets[0].data = data;
+    chartPendidikan.update();
+    return;
+  }
+  chartPendidikan = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Jumlah Warga',
+        data: data,
+        backgroundColor: '#00529C',
+        borderRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end',
+          align: 'top',
+          color: '#1E293B',
+          font: { family: 'Plus Jakarta Sans', weight: 'bold', size: 11 },
+          formatter: (value) => value.toLocaleString('id-ID')
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { precision: 0 },
+          grace: '18%'
+        }
+      }
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  fetchSheetData();
+  setInterval(fetchSheetData, 10000);
+});
+</script>
+</body>
+</html>
