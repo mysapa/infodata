@@ -1,2978 +1,919 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>SAPA - RT 09 Digital Service System</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-    body {
-      background-color: #d3e8fa;
-      color: #1e293b;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      touch-action: manipulation;
-    }
-    .app-container {
-      width: 100%;
-      max-width: 100%;
-      background: #f8fafc;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow-x: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    }
-    @media (min-width: 768px) {
-      body {
-        padding: 20px;
-        background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
-      }
-      .app-container {
-        max-width: 960px;
-        min-height: calc(100vh - 40px);
-        border-radius: 24px;
-        overflow: hidden;
-      }
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Infografis Data Warga SAPA RT 09</title>
 
-    /* ================= 1. HALAMAN LOGIN ================= */
-    .login-view {
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background-color: #ffffff;
-      color: #0f172a;
-      text-align: center;
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-    }
-    .login-view::before {
-      content: "";
-      position: absolute;
-      top: -100px;
-      right: -100px;
-      width: 320px;
-      height: 320px;
-      border: 40px solid rgba(255,255,255,0.04);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-    .login-view::after {
-      content: "";
-      position: absolute;
-      bottom: -80px;
-      left: -80px;
-      width: 280px;
-      height: 280px;
-      border: 30px solid rgba(56,189,248,0.08);
-      border-radius: 40px;
-      transform: rotate(25deg);
-      pointer-events: none;
-    }
-    .welcome-text-medium {
-      font-size: 12px;
-      font-weight: 600;
-      color: #0072CE;
-      margin-bottom: 12px;
-    }
-    .login-card {
-      width: 100%;
-      max-width: 420px;
-      box-sizing: border-box;
-      background: none;
-      padding: 16px 36px;
-      border-radius: 0;
-      box-shadow: none;
-      color: #1e293b;
-      text-align: left;
-      z-index: 10;
-    }
-    @media (min-width: 576px) {
-      .login-card {
-        padding: 32px 28px;
-        border-radius: 24px;
-      }
-    }
-    .form-group {
-      margin-bottom: 18px;
-    }
-    .form-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #0072CE;
-      color: #ffffff;
-      padding: 8px 24px;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .login-label-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-    .login-label-row .form-label {
-      margin-bottom: 0;
-    }
-    .btn-login-faq {
-      width: 38px;
-      height: 38px;
-      border: none;
-      border-radius: 12px;
-      background: #0072CE;
-      color: #ffffff;
-      font-size: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-    }
-    .btn-login-faq:hover {
-      background: #005ba8;
-      transform: translateY(-1px);
-    }
-    .input-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-    .input-wrapper i {
-      position: absolute;
-      left: 16px;
-      color: #64748b;
-      font-size: 16px;
-    }
-    .form-control {
-      width: 100%;
-      padding: 14px 16px 14px 48px;
-      border: 2px solid #cbd5e1;
-      border-radius: 12px;
-      font-size: 17px;
-      font-weight: 700;
-      color: #0f172a;
-      outline: none;
-      background: #f8fafc;
-      letter-spacing: 0.5px;
-    }
-    .form-control:focus {
-      border-color: #0284c7;
-      background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(2,132,199,0.15);
-    }
-    .btn-primary {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg,#0284c7 0%,#0369a1 100%);
-      color: #ffffff;
-      border: none;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      box-shadow: 0 6px 20px rgba(2,132,199,0.35);
-      transition: all 0.2s ease;
-    }
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(2,132,199,0.45);
-    }
-    .alert-danger {
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      color: #dc2626;
-      padding: 12px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: 600;
-      margin-top: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    #nikInput::placeholder {
-      font-size: 14px;
-      font-weight: 400;
-      color: #94a3b8;
-      opacity: 1;
-    }
-    .login-divider {
-      position: relative;
-      text-align: center;
-      margin: 24px 0 14px;
-    }
-    .login-divider span {
-      position: relative;
-      font-size: 13px;
-      font-weight: 700;
-      color: #16A34A;
-      letter-spacing: 0.5px;
-    }
-    .btn-absen-ronda {
-      width: 100%;
-      padding: 10px 12px;
-      background: linear-gradient(135deg,#10b981 0%,#047857 100%);
-      color: #ffffff;
-      border: none;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 6px 18px rgba(16,185,129,0.3);
-      transition: all 0.2s ease;
-    }
-    .btn-absen-ronda:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 22px rgba(16,185,129,0.4);
-    }
-    .ronda-btn-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .ronda-icon-glow {
-      width: 28px;
-      height: 28px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-    }
+<!-- Font Awesome 6.5 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- Google Fonts: Plus Jakarta Sans & Poppins -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Chart.js & Plugin DataLabels CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
-    /* ================= 2. DASHBOARD UTAMA ================= */
-    .dashboard-view {
-      display: none;
-      flex-direction: column;
-      flex: 1;
-      background: #f8fafc;
-      padding-bottom: 96px;
-      position: relative;
-    }
-    .dash-header {
-      background: linear-gradient(135deg,#0f2b48 0%,#1d4ed8 100%);
-      color: #ffffff;
-      padding: 32px 24px 50px;
-      border-bottom-left-radius: 32px;
-      border-bottom-right-radius: 32px;
-    }
-    @media (min-width: 768px) {
-      .dash-header {
-        padding: 36px 32px 56px;
-      }
-    }
-    .header-nav-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 24px;
-    }
-    .nav-left-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .app-version-tag {
-      font-size: 18px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: 0.3px;
-      margin-top: -16px;
-    }
-    .nav-btn-icon {
-      width: 38px;
-      height: 38px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 17px;
-      color: #ffffff;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-      margin-top: -16px;
-    }
-    .header-user-profile {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .btn-exit {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: #efa2a2;
-      padding: 9px;
-      border-radius: 12px;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-right: -6px;
-      margin-top: -16px;
-    }
-    .dash-date-badge {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: fit-content;
-      margin: 0 auto 18px;
-      font-size: 13px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.85);
-      background: rgba(255,255,255,0.12);
-      padding: 6px 14px;
-      border-radius: 50px;
-      backdrop-filter: blur(4px);
-    }
-    .greeting-subtitle {
-      font-size: 13px;
-      color: #93c5fd;
-      font-weight: 600;
-      text-align: center;
-      margin-bottom: 4px;
-    }
-    .user-name-row {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      width: 100%;
-      margin-top: 6px;
-    }
-    .user-name-display {
-      font-size: 15px;
-      font-weight: 800;
-      color: #ffffff;
-      text-align: center;
-    }
-    .btn-data-pribadi-header {
-      background: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.35);
-      color: #ffffff;
-      padding: 9px 30px;
-      border-radius: 50px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      backdrop-filter: blur(8px);
-      transition: all 0.2s ease;
-    }
-    .btn-data-pribadi-header:hover {
-      background: rgba(255,255,255,0.3);
-    }
-    .surat-card-floating {
-      margin: -30px 20px 8px;
-      z-index: 10;
-      position: relative;
-    }
-    @media (min-width: 768px) {
-      .surat-card-floating {
-        margin: -36px 32px 8px;
-      }
-    }
-    .surat-card {
-      background: #ffffff;
-      border-radius: 22px;
-      padding: 20px 22px;
-      box-shadow: 0 12px 30px rgba(15,23,42,0.08);
-      border: 1px solid #e2e8f0;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    @media (min-width: 576px) {
-      .surat-card {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
-    }
-    .surat-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #0f172a;
-      margin-bottom: 4px;
-    }
-    .surat-desc {
-      font-size: 11.5px;
-      color: #64748b;
-      line-height: 1.4;
-    }
-    .btn-ajukan {
-      background: linear-gradient(135deg,#10b981 0%,#059669 100%);
-      color: #ffffff;
-      padding: 12px 20px;
-      border-radius: 14px;
-      font-size: 14px;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      box-shadow: 0 4px 14px rgba(16,185,129,0.3);
-      cursor: pointer;
-      border: none;
-      white-space: nowrap;
-    }
+<style>
+:root {
+  --bri-navy: #002D58;
+  --bri-blue-dark: #003865;
+  --bri-blue: #00529C;
+  --bri-blue-light: #1072BA;
+  --bri-accent-orange: #FF6B00;
+  --bri-orange-soft: #FFF2EA;
+  --bri-green: #108981;
+  --bri-green-soft: #E6F4EA;
+  --bg-canvas: #F2F5F9;
+  --card-bg: #FFFFFF;
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+  --border-color: #E2E8F0;
+}
 
-    /* MENU UTAMA */
-    .menu-section {
-      padding: 0 20px;
-      margin-top: 12px;
-    }
-    @media (min-width: 768px) {
-      .menu-section {
-        padding: 0 32px;
-      }
-    }
-    .section-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #051937;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 14px 8px;
-    }
-    @media (min-width: 576px) {
-      .menu-grid {
-        grid-template-columns: repeat(4,1fr);
-        gap: 20px 18px;
-      }
-    }
-    .menu-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      color: #334155;
-      cursor: pointer;
-      padding: 14px 6px;
-      border-radius: 18px;
-    }
-    .menu-item:hover {
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      transform: translateY(-3px);
-    }
-    .menu-icon-box {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      margin-bottom: 8px;
-      position: relative;
-    }
-    @media (min-width: 576px) {
-      .menu-icon-box {
-        width: 52px;
-        height: 52px;
-        border-radius: 16px;
-        font-size: 22px;
-      }
-    }
-    .menu-label {
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 1.3;
-      color: #334155;
-    }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
 
-    /* MENU LAINNYA */
-    .other-features-menu {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition:
-        grid-template-rows 0.35s cubic-bezier(0.4,0,0.2,1),
-        opacity 0.3s ease,
-        margin 0.35s ease;
-      overflow: hidden;
-      opacity: 0;
-      margin-top: 0;
-    }
-    .other-features-inner {
-      min-height: 0;
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 14px 8px;
-      padding: 4px 0 6px;
-    }
-    .other-features-menu.show {
-      grid-template-rows: 1fr;
-      opacity: 1;
-      margin-bottom: 6px;
-    }
-    .other-features-header {
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: underline;
-      text-align: center;
-      color: #3B82F6;
-      cursor: pointer;
-      margin-top: 4px;
-      transition: color 0.2s ease;
-    }
-    #otherFeaturesIcon {
-      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
-      display: inline-block;
-      margin-left: 4px;
-    }
-    #otherFeaturesIcon.open {
-      transform: rotate(180deg);
-    }
-    .bg-info-data { background:#e0f2fe; color:#0284c7; }
-    .bg-arsip { background:#fef3c7; color:#d97706; }
-    .bg-ronda { background:#dcfce7; color:#16a34a; }
-    .bg-profil { background:#e0e7ff; color:#4f46e5; }
-    .bg-program { background:#f3e8ff; color:#9333ea; }
-    .bg-admin { background:#ffe4e6; color:#e11d48; }
-    .bg-dbase { background:#cffaff; color:#0891b2; }
-    .bg-pbb { background:#d1fae5; color:#059669; }
-    .bg-tanya { background:#ffedd5; color:#ea580c; }
-    .bg-pemkot { background:#e0f2fe; color:#0284c7; }
-    .bg-polri { background:#fef3c7; color:#d97706; }
-    .bg-pln { background:#fef9c3; color:#ca8a04; }
-    .bg-damkar { background:#ffe4e6; color:#e11d48; }
-    .bg-ambulans { background:#fee2e2; color:#e11d48; }
-    .menu-item-hidden {
-      display: none !important;
-    }
-    .disabled {
-      opacity: 0.6 !important;
-      cursor: not-allowed !important;
-      filter: grayscale(100%) !important;
-      pointer-events: none !important;
-      user-select: none;
-    }
-    .menu-item.disabled .menu-icon-box::after {
-      content: "\f023";
-      font-family: "Font Awesome 6 Free";
-      font-weight: 700;
-      position: absolute;
-      top: -4px;
-      right: -4px;
-      background: #64748b;
-      color: #ffffff;
-      font-size: 14px;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid #ffffff;
-    }
-    .menu-alert::after {
-      content: "";
-      position: absolute;
-      width: 14px;
-      height: 14px;
-      background: #ef4444;
-      border: 2px solid #ffffff;
-      border-radius: 50%;
-      top: -3px;
-      right: -3px;
-    }
-
-    /* ================= BOTTOM NAVBAR ================= */
-    .bottom-navbar {
-      position: fixed;
-      left: 50%;
-      bottom: calc(0px + env(safe-area-inset-bottom));
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 960px;
-      height: 68px;
-      background: rgba(255,255,255,0.97);
-      border-top: 1px solid #e2e8f0;
-      border-radius: 15px;
-      box-shadow: 0 -6px 20px rgba(15,23,42,0.10);
-      display: none;
-      grid-template-columns: repeat(5,1fr);
-      align-items: center;
-      padding: 6px 8px;
-      z-index: 1900;
-      backdrop-filter: blur(10px);
-    }
-    .bottom-nav-item {
-      height: 56px;
-      border: none;
-      background: transparent;
-      color: #334155;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      font-size: 11.5px;
-      font-weight: 700;
-      cursor: pointer;
-      border-radius: 12px;
-      position: relative;
-    }
-    .bottom-nav-item i {
-      font-size: 19px;
-      color: #60a5fa;
-    }
-    .bottom-nav-item.active {
-      color: #00529c;
-    }
-    .bottom-nav-center {
-      width: 65px;
-      height: 65px;
-      margin: -34px auto 0;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #1d4ed8 0%, #60a5fa 100%);
-      color: #ffffff;
-      box-shadow: 0 7px 18px rgba(16,185,129,0.35);
-      border: 4px solid #f8fafc;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2px;
-      cursor: pointer;
-      position: relative;
-    }
-    .bottom-nav-center i {
-      font-size: 18px;
-      color: #ffffff;
-    }
-    .bottom-nav-center span {
-      font-size: 11px;
-      line-height: 1;
-    }
-    @media (min-width: 768px) {
-      .bottom-navbar {
-        bottom: 12px;
-        border-radius: 18px;
-        width: calc(100% - 40px);
-      }
-    }
-    
-    /* SIDEBAR */
-    .sidebar-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15,23,42,0.6);
-      backdrop-filter: blur(4px);
-      z-index: 1000;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    .sidebar-backdrop.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .sidebar-panel {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 80%;
-      max-width: 320px;
-      height: 100%;
-      background: #ffffff;
-      z-index: 1001;
-      transform: translateX(-100%);
-      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
-      display: flex;
-      flex-direction: column;
-      box-shadow: 10px 0 30px rgba(0,0,0,0.15);
-    }
-    .sidebar-panel.active {
-      transform: translateX(0);
-    }
-    .sidebar-header {
-      background: linear-gradient(135deg,#0f2b48 0%,#1a4971 100%);
-      color: #ffffff;
-      padding: 24px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .sidebar-title {
-      font-size: 16px;
-      font-weight: 800;
-    }
-    .sidebar-content {
-      padding: 20px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow-y: auto;
-    }
-    .sidebar-menu-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .sidebar-menu-item {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 14px;
-      width: 100%;
-      padding: 12px 16px;
-      border-radius: 12px;
-      color: #334155;
-      font-weight: 600;
-      font-size: 14px;
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.2s ease;
-    }
-    .sidebar-menu-item i {
-      width: 22px;
-      min-width: 22px;
-      text-align: center;
-    }
-    .sidebar-menu-item:hover {
-      background: #f1f5f9;
-      color: #0284c7;
-    }
-    .sidebar-logout-btn {
-      margin-top: 24px;
-      padding: 14px;
-      border-radius: 12px;
-      background: #fef2f2;
-      color: #dc2626;
-      border: 1px solid #fecaca;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    /* SUB-PAGE */
-    .subpage-view {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      background: #ffffff;
-      z-index: 2000;
-      transform: translateX(100%);
-      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
-      display: flex;
-      flex-direction: column;
-    }
-    .subpage-view.active {
-      transform: translateX(0);
-    }
-    .progress-bar-container {
-      width: 100%;
-      height: 4px;
-      background: rgba(255,255,255,0.2);
-      position: relative;
-      overflow: hidden;
-      display: none;
-    }
-    .progress-bar-fill {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      background: linear-gradient(90deg,#38bdf8,#818cf8);
-      width: 0%;
-      animation: progressAnim 1.2s infinite ease-in-out;
-    }
-    @keyframes progressAnim {
-      0% { left:-40%; width:40%; }
-      50% { left:20%; width:60%; }
-      100% { left:100%; width:100%; }
-    }
-    .subpage-header {
-      height: 60px;
-      background: linear-gradient(135deg,#0f2b48 0%,#1d4ed8 100%);
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 18px;
-      position: relative;
-      box-shadow: 0 4px 12px rgba(15,43,72,0.25);
-    }
-    .btn-subpage-back {
-      position: absolute;
-      left: 18px;
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.15);
-      color: #ffffff;
-      font-size: 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .subpage-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #ffffff;
-      text-align: center;
-      width: 100%;
-      padding: 0 60px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .subpage-iframe {
-      width: 100%;
-      height: calc(100% - 60px);
-      border: none;
-      background: #ffffff;
-    }
-
-    /* FOOTER */
-    .app-footer {
-      margin-top: 12px;
-      padding: 12px 20px;
-      text-align: center;
-      background: none;
-    }
-    .login-view .app-footer {
-      margin-top: 10px !important;
-      padding: 0 20px 16px;
-      text-align: center;
-      transition: margin-top 0.35s ease;
-    }
-    .visitor-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #e0f2fe;
-      color: #0369a1;
-      padding: 8px 18px;
-      border-radius: 50px;
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-    .footer-copy {
-      font-size: 11px;
-      color: #808080;
-      font-weight: 400;
-    }
-    .footer-copy1 {
-      position: absolute;
-      bottom: 15px;
-      left: 0;
-      width: 100%;          /* Memastikan teks tetap bisa ke tengah */
-      padding: 12px 20px;
-      text-align: center;
-      background: none;
-      box-sizing: border-box;
-      font-size: 11px;
-      color: #ffffff;
-      font-weight: 400;
-    }
-    .spinner {
-      border: 3px solid rgba(255,255,255,0.3);
-      border-radius: 50%;
-      border-top: 3px solid #ffffff;
-      width: 18px;
-      height: 18px;
-      animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin {
-      0% { transform:rotate(0deg); }
-      100% { transform:rotate(360deg); }
-    }
-
-    /* GALERI */
-    .scroll-gallery-wrapper {
-      width: 100%;
-      margin: 12px 0;
-    }
-    .informasi-data-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      padding-bottom: 2px;
-    }
-    .informasi-data-judul {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 15px;
-      font-weight: 700;
-      color: #0f172a;
-    }
-    .informasi-data-link {
-      font-size: 14px;
-      font-weight: 600;
-      color: #007bff;
-      cursor: pointer;
-    }
-    .informasi-data-section,
-    .scroll-gallery-wrapper {
-      padding-top: 0 !important;
-    }
-    .informasi-data-section {
-      margin-top: 0 !important;
-    }
-    .scroll-gallery-container {
-      display: flex;
-      flex-direction: row;
-      overflow-x: auto;
-      gap: 8px;
-      padding: 4px 0;
-      background: transparent;
-      border: none;
-      -webkit-overflow-scrolling: touch;
-      scroll-behavior: smooth;
-      scrollbar-width: none;
-      margin-top: 4px;
-    }
-    .scroll-gallery-container::before,
-    .scroll-gallery-container::after {
-      content: "";
-      flex: 0 0 12px;
-    }
-    .scroll-gallery-container::-webkit-scrollbar {
-      display: none;
-    }
-    .gallery-card {
-      flex: 0 0 auto;
-      width: 200px;
-      height: 160px;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #f0f0f0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    }
-    .gallery-card img,
-    .gallery-card-sp img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .gallery-card-sp {
-      flex: 0 0 auto;
-      width: 270px;
-      height: 90px;
-      border-radius: 15px;
-      overflow: hidden;
-      background: #f0f0f0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    }
-    .loading-text {
-      font-size: 11px;
-      color: #888;
-      padding: 8px 0;
-    }
-    .section-divider {
-      height: 6px;
-      background-color: #e2e8f0;
-      border: none;
-      margin: 12px -16px;
-      width: auto;
-    }
-    .section-divider-utama {
-      height: 6px;
-      background-color: #e2e8f0;
-      border: none;
-      margin: 12px -16px;
-      width: auto;
-      transition: margin-top 0.35s ease;
-    }
-    @media (min-width: 768px) {
-      .section-divider,
-      .section-divider-utama {
-        margin-left: -24px;
-        margin-right: -24px;
-      }
-    }
-
-    /* HEADER LOGIN */
-    .login-header-banner {
-      position: relative;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: auto;
-      margin: 0;
-      padding: 0;
-      border-radius: 0;
-      overflow: hidden;
-      display: none;
-      z-index: 1;
-    }
-    .login-header-banner img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: fill;
-      object-position: center center;
-    }
-
-    /* ================= POLLING ================= */
-    .bg-polling { background:#dbeafe; color:#2563eb; }
-    .polling-modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15,23,42,0.58);
-      backdrop-filter: blur(4px);
-      z-index: 3000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-    }
-    .polling-modal-backdrop.show { display:flex; }
-    .polling-modal {
-      width:100%;
-      max-width:520px;
-      max-height:90vh;
-      overflow-y:auto;
-      background:#fff;
-      border-radius:22px;
-      box-shadow:0 20px 60px rgba(15,23,42,0.25);
-      padding:20px;
-      position:relative;
-    }
-    .polling-modal-header {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:16px;
-    }
-    .polling-modal-title {
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-size:17px;
-      font-weight:800;
-      color:#0f172a;
-    }
-    .polling-close {
-      width:36px;height:36px;border:0;border-radius:10px;
-      background:#f1f5f9;color:#64748b;cursor:pointer;font-size:16px;
-    }
-    .polling-form-group { margin-bottom:15px; }
-    .polling-form-label {
-      display:block;font-size:12px;font-weight:700;color:#334155;margin-bottom:7px;
-    }
-    .polling-textarea,.polling-datetime {
-      width:100%;border:1px solid #cbd5e1;border-radius:12px;
-      padding:11px 12px;font-size:13px;color:#0f172a;outline:none;background:#f8fafc;
-    }
-    .polling-textarea { min-height:130px;resize:vertical;line-height:1.45; }
-    .polling-textarea:focus,.polling-datetime:focus { border-color:#0284c7;box-shadow:0 0 0 3px rgba(2,132,199,.12);background:#fff; }
-    .polling-char-count { text-align:right;font-size:10px;color:#94a3b8;margin-top:4px; }
-    .polling-check-row { display:flex;flex-wrap:wrap;gap:10px; }
-    .polling-check-card {
-      flex:1 1 150px;display:flex;align-items:center;gap:8px;
-      padding:11px 12px;border:1px solid #e2e8f0;border-radius:12px;background:#f8fafc;
-      font-size:12px;font-weight:700;color:#334155;
-    }
-    .polling-check-card input { width:17px;height:17px;accent-color:#2563eb; }
-    .polling-note { font-size:11px;color:#64748b;line-height:1.45;margin-top:8px; }
-    .polling-actions { display:flex;gap:9px;margin-top:18px; }
-    .polling-btn { flex:1;border:0;border-radius:12px;padding:12px;font-size:12px;font-weight:800;cursor:pointer; }
-    .polling-btn-primary { background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff; }
-    .polling-btn-secondary { background:#f1f5f9;color:#475569; }
-    .polling-btn-danger { background:#fee2e2;color:#b91c1c; }
-    .polling-question {
-      background:#eff6ff;border:1px solid #dbeafe;border-radius:15px;padding:14px;
-      font-size:14px;font-weight:700;line-height:1.5;color:#0f172a;margin-bottom:15px;
-    }
-    .polling-info-box {
-      text-align:center;margin-bottom:15px;padding:10px 12px;background:#f8fafc;border-radius:14px;border:1px solid #e2e8f0;
-    }
-    .polling-deadline { font-size:12px;color:#64748b;margin-bottom:4px; }
-    .polling-countdown { font-size:13px;font-weight:700;color:#0284c7; }
-    .polling-countdown span { font-family:monospace;font-size:15px;letter-spacing:1px; }
-    .polling-choice-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:9px; }
-    .polling-choice {
-      border:none;border-radius:14px;padding:13px 7px;
-      cursor:pointer;font-weight:800;font-size:13px;color:#ffffff;display:flex;flex-direction:column;align-items:center;gap:7px;
-      transition:all 0.2s ease;
-    }
-    .polling-choice i { font-size:25px; color:#ffffff; }
-    .polling-choice-setuju { background-color:#16a34a; }
-    .polling-choice-setuju:hover:not(:disabled) { background-color:#15803d;transform:translateY(-2px);box-shadow:0 7px 18px rgba(22,165,74,0.3); }
-    .polling-choice-tidak { background-color:#dc2626; }
-    .polling-choice-tidak:hover:not(:disabled) { background-color:#b91c1c;transform:translateY(-2px);box-shadow:0 7px 18px rgba(220,38,38,0.3); }
-    .polling-choice-abstain { background-color:#eab308; }
-    .polling-choice-abstain:hover:not(:disabled) { background-color:#ca8a04;transform:translateY(-2px);box-shadow:0 7px 18px rgba(234,179,8,0.3); }
-    .polling-choice:disabled { opacity:.5;cursor:not-allowed;filter:grayscale(0.6); }
-    .polling-family-note { background:#fefce8;border:1px solid #fde68a;color:#854d0e;border-radius:13px;padding:12px;font-size:12.5px;line-height:1.5;text-align:center;margin-top:13px; }
-    .polling-result-title { text-align:center;font-size:13px;font-weight:800;color:#0f172a;margin-bottom:10px; }
-    .polling-pie-wrap { display:flex;justify-content:center;margin:4px 0 16px; }
-    .polling-pie { width:190px;height:190px;border-radius:50%;position:relative;background:#e2e8f0; }
-    .polling-pie::after { content:"";position:absolute;inset:43px;background:#fff;border-radius:50%; }
-    .polling-legend { display:grid;gap:7px; }
-    .polling-legend-row { display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#475569; }
-    .polling-legend-left { display:flex;align-items:center;gap:7px; }
-    .polling-dot { width:10px;height:10px;border-radius:50%;display:inline-block; }
-    .polling-empty { text-align:center;padding:18px 8px;color:#64748b;font-size:12px; }
-    @media (max-width:576px) {
-      .polling-modal { padding:17px;border-radius:19px; }
-      .polling-choice-grid { gap:7px; }
-      .polling-choice { padding:11px 5px;font-size:12px; }
-      .polling-pie { width:170px;height:170px; }
-      .polling-pie::after { inset:39px; }
-    }
-
-    /* PANGGILAN DARURAT */
-    .emergency-section {
-      width: 100%;
-      margin: 4px 0 0;
-      padding: 0;
-      overflow: hidden;
-    }
-    .emergency-header {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      padding: 8px 4px;
-      cursor: pointer;
-      user-select: none;
-    }
-    .emergency-title {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #dc2626;
-    }
-    .emergency-title i {
-      color: #dc2626;
-      font-size: 14px;
-    }
-    #emergencyArrow {
-      color: #dc2626;
-      font-size: 14px;
-      font-weight: 700;
-      transition: transform 0.25s ease;
-    }
-    #emergencyArrow.open {
-      transform: rotate(180deg);
-    }
-    .emergency-menu {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition:
-        grid-template-rows 0.35s cubic-bezier(0.4,0,0.2,1),
-        opacity 0.35s ease;
-      overflow: hidden;
-      opacity: 0;
-    }
-    .emergency-menu.show {
-      grid-template-rows: 1fr;
-      opacity: 1;
-    }
-    .emergency-menu-inner {
-      min-height: 0;
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 4px;
-      width: 100%;
-      padding: 8px 8px 2px;
-    }
-
-    /* ================= LAYAR PEMBUKA SAPA ================= */
-    #sapaIntroScreen {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, #003399 0%, #0072CE 60%, #46a3f0 100%);
-      z-index: 99999;
-      transform: translateX(0);
-      visibility: visible;
-      pointer-events: auto;
-      will-change: transform;
-      overflow: hidden;
-    }
-/* Pembungkus Utama Layar Pembuka */
-.sapa-intro-content {
-  position: absolute;
-  inset: 0;
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-main);
   display: flex;
-  align-items: center;    /* Mengunci LOGO pas di tengah horizontal */
-  justify-content: center;/* Mengunci LOGO pas di tengah vertikal */
-  text-align: center;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 0;
 }
 
-/* LOGO - Konsisten di tengah layar secara mutlak */
-.sapa-intro-logo {
-  width: 140px;
-  height: 140px;
-  object-fit: contain;
-  display: block;
-  margin: 0; /* Reset margin karena posisi sudah dikunci oleh Flexbox di atas */
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.18));
-  
-  /* Fade-in + zoom lembut */
-  opacity: 0;
-  transform: scale(0.65);
-  animation: sapaLogoZoom 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-    @keyframes sapaLogoZoom {0% {opacity: 0; transform: scale(0.65); }
-    60% {opacity: 1; transform: scale(1.08); }
-    100% {opacity: 1; transform: scale(1); }
-    }
-
-/* Pembungkus Teks - Dibuat melayang di atas logo */
-.sapa-intro-title-wrapper {
-  position: absolute;
-  /* Rumus: Setengah tinggi layar (50%) dikurangi setengah ukuran logo (70px) dikurangi jarak 24px */
-  bottom: calc(50% + 70px + 48px); 
-  left: 0;
+/* Base Container */
+.app-container {
   width: 100%;
+  max-width: 100%;
+  background: var(--bg-canvas);
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+/* Header Banner dengan Statistik Menyatu di Dalamnya */
+.app-header {
+  background: linear-gradient(135deg, var(--bri-navy) 0%, var(--bri-blue) 100%);
+  color: white;
+  padding: 24px 20px 24px 20px;
+  border-radius: 0 0 28px 28px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.greeting-text {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.greeting-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.sync-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #10B981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #10B981;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* TEKS ANGKA, IKON & JUDUL RATA TENGAH SIMETRIS */
+.header-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.stat-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
-/* TITLE - Paling atas */
-.sapa-intro-title {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  text-align: center;
+.stat-num {
   font-size: 26px;
-  line-height: 1.8;
-  font-weight: 700;
-  color: #ffffff;
-  animation: sapaTextAppear 0.8s ease-out 0.25s both;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.1;
+  text-align: center;
 }
 
-/* SUBTITLE - Di bawah Title, menempel (jarak 0), dan berjarak 24px di atas logo */
-.sapa-intro-subtitle {
-  margin: 0; /* Jarak 0 dari Title */
-  padding: 0;
-  width: 100%;
+.stat-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 4px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   text-align: center;
+}
+
+.stat-label i {
+  font-size: 14px;
+}
+
+/* Content Area Layout */
+.content-section {
+  padding: 20px 16px 0 16px;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--bri-navy);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Accordion Styling */
+.category-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.category-item {
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  touch-action: manipulation;
+}
+
+.category-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  background: #FFFFFF;
+  transition: background 0.25s;
+}
+
+.category-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  padding-right: 10px;
+}
+
+.category-icon-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(0, 82, 156, 0.06);
+  color: var(--bri-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.category-text-box h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+
+.category-text-box span {
   font-size: 12px;
-  line-height: 0.8;
+  color: var(--text-muted);
   font-weight: 500;
-  color: #ffffff;
-  animation: sapaTextAppear 0.8s ease-out 0.25s both;
-} 
-    
-    #sapaIntroScreen.sapa-intro-hide {
-      transform: translateX(-100%);
-      pointer-events: none;
-      transition: transform 0.75s cubic-bezier(0.76, 0, 0.24, 1);
-    }
-    #sapaIntroScreen.sapa-intro-gone {
-      visibility: hidden;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      #sapaIntroScreen.sapa-intro-hide {
-        transition-duration: 0.01ms;
-      }
-    }
-  </style>
+  margin-top: 2px;
+  display: block;
+}
+
+.toggle-arrow {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-canvas);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.category-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #FAFAFA;
+  border-top: 1px solid transparent;
+  padding: 0 16px;
+}
+
+/* Active State for Accordion */
+.category-item.active {
+  border-color: var(--bri-blue);
+  box-shadow: 0 4px 16px rgba(0, 82, 156, 0.08);
+}
+.category-item.active .category-header {
+  background: #F8FAFC;
+}
+.category-item.active .category-icon-badge {
+  background: var(--bri-blue);
+  color: white;
+}
+.category-item.active .toggle-arrow {
+  transform: rotate(180deg);
+  background: var(--bri-blue);
+  color: white;
+}
+.category-item.active .category-body {
+  max-height: 1200px;
+  padding: 16px;
+  border-top-color: var(--border-color);
+}
+
+/* Chart & Table Box Styling */
+.chart-box {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 14px;
+}
+.chart-box:last-child {
+  margin-bottom: 0;
+}
+.chart-box h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--bri-navy);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Custom Table */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #FFFFFF;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 12.5px;
+  border: 1px solid var(--border-color);
+}
+.custom-table th {
+  background-color: #F1F5F9;
+  color: var(--bri-navy);
+  font-weight: 700;
+  text-align: left;
+  padding: 10px 12px;
+}
+.custom-table td {
+  padding: 10px 12px;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+
+/* Benefit List Cards */
+.benefit-item {
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.benefit-item:last-child {
+  margin-bottom: 0;
+}
+.benefit-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.benefit-metrics {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.badge-count {
+  background-color: rgba(0, 82, 156, 0.08);
+  color: var(--bri-blue);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.badge-percent {
+  background-color: var(--bri-green-soft);
+  color: #067A4B;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 12px;
+  border: 1px solid #B7EBC9;
+}
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  padding: 30px 16px 10px 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: var(--bri-navy);
+  margin-bottom: 4px;
+}
+
+/* Responsive PC Layout */
+.inner-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 768px) {
+  body {
+    padding: 30px 20px;
+  }
+  .app-container {
+    max-width: 1080px;
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(0, 56, 101, 0.08);
+    overflow: hidden;
+  }
+  .app-header {
+    padding: 32px 36px 28px 36px;
+    border-radius: 24px 24px 0 0;
+  }
+  .greeting-name {
+    font-size: 24px;
+  }
+  .stat-num {
+    font-size: 32px;
+  }
+  .content-section {
+    padding: 24px 36px 0 36px;
+  }
+  .category-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .category-item.full-width-pc {
+    grid-column: span 2;
+  }
+  .inner-grid-2col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1200px) {
+  .app-container {
+    max-width: 1140px;
+  }
+}
+</style>
 </head>
-<body> 
-<div id="sapaIntroScreen"
-     aria-hidden="true"
-     style="position:fixed;inset:0;width:100%;height:100%;background:#0072CE;z-index:2147483647;transform:translateX(0);visibility:visible;pointer-events:auto;will-change:transform;">
+<body>
 
-  <div class="sapa-intro-content">
-    <div class="sapa-intro-title-wrapper">
-      <h1 class="sapa-intro-title">
-        Selamat Datang
-      </h1>
-      <p class="sapa-intro-subtitle">
-        Layanan digital untuk warga RT 09 Bonggoeya
-      </p>
-    </div>
-      <img
-        class="sapa-intro-logo"
-        src="https://res.cloudinary.com/q7sznixw/image/upload/v1791074027/Firefly_RemoveBackground_saeu0l.webp"
-        alt="Logo MySAPA">
-  </div>
-  <footer class="app-footer">
-    <div class="footer-copy1">
-      Powered by <strong>Anto</strong> Design Concept &copy; 2026
-    </div>
-  </footer>
-</div>
-<script>
-  
-/* Pengendali intro terpisah dari script utama SAPA agar tetap bekerja
-   meskipun script aplikasi mengalami kesalahan. */
-(function () {
-  var intro = document.getElementById('sapaIntroScreen');
-  if (!intro) return;
-  var hidden = false;
-  window.SAPAIntroPendingRequests = 0;
-
-  function hideIntro() {
-    if (hidden) return;
-    hidden = true;
-    intro.style.transition = 'transform 0.75s cubic-bezier(0.76, 0, 0.24, 1)';
-    intro.style.transform = 'translateX(-100%)';
-    intro.style.pointerEvents = 'none';
-    window.setTimeout(function () {
-      intro.style.visibility = 'hidden';
-      intro.style.display = 'none';
-    }, 800);
-  }
-
-  function checkReady() {
-    if (hidden || document.readyState !== 'complete') return;
-    if (window.SAPAIntroPendingRequests > 0) return;
-    window.setTimeout(function () {
-      if (!hidden && document.readyState === 'complete' && window.SAPAIntroPendingRequests === 0) {
-        hideIntro();
-      }
-    }, 250);
-  }
-
-  window.sapaIntroTryHide = checkReady;
-  window.addEventListener('load', checkReady);
-  /* Failsafe mandiri: tidak bergantung pada script utama. */
-  window.setTimeout(hideIntro, 15000);
-})();
-</script>
-  
 <div class="app-container">
-  
-  <!-- ================= 1. HALAMAN LOGIN ================= -->
-  <div id="loginView" class="login-view">
-    <div id="loginHeaderContainer" class="login-header-banner">
-      <img id="loginHeaderImg" src="" alt="Header Login">
-    </div>
-    <div class="welcome-text-medium">
-      Layanan digital untuk warga RT 09 Bonggoeya
-    </div>
-    <div class="login-card">
-      <div class="form-group">
-        <div class="login-label-row">
-          <label class="form-label" for="nikInput">
-            <i class="fa-solid fa-lock"></i> Login
-          </label>
-          <button
-            type="button"
-            class="btn-login-faq"
-            onclick="openAppPage('Tanya Jawab', BASE_URLS.tanyaJawab)"
-            title="FAQ"
-            aria-label="FAQ">
-            <i class="fa-solid fa-circle-question"></i>
-          </button>
-        </div>
-        <div class="input-wrapper">
-          <i class="fa-solid fa-id-card"></i>
-          <input
-            type="number"
-            id="nikInput"
-            class="form-control"
-            placeholder="Ketik 16 digit NIK Anda"
-            autocomplete="off"
-            onkeypress="handleKeyPress(event)">
-        </div>
+  <!-- Top Header Banner -->
+  <div class="app-header">
+    <div class="header-top">
+      <div class="header-left">
+        <div class="greeting-text">Infografis Real-Time</div>
+        <div class="greeting-name">Data Kependudukan</div>
       </div>
-      <button id="btnLogin" class="btn-primary" onclick="processLogin()">
-        <span id="btnText">Masuk</span>
-        <i id="btnIcon" class="fa-solid fa-right-to-bracket"></i>
-        <div id="btnSpinner" class="spinner" style="display:none;"></div>
-      </button>
-      <div id="loginError" class="alert-danger" style="display:none;">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <span id="errorMsg">NIK tidak ditemukan.</span>
-      </div>
-      <div class="login-divider">
-        <span>
-          <i class="fa-solid fa-bolt"></i>
-          Quick Access
-        </span>
-      </div>
-      <button class="btn-absen-ronda" onclick="openAbsenRondaDirect()">
-        <div class="ronda-btn-left">
-          <div class="ronda-icon-glow">
-            <i class="fa-solid fa-shield-halved"></i>
-          </div>
-          <span>Absen Ronda Malam</span>
-        </div>
-        <i class="fa-solid fa-chevron-right"></i>
-      </button>
-    </div>
-    
-    <!-- PANGGILAN DARURAT & FOOTER -->
-    <section class="emergency-section">
-      <div class="emergency-header" onclick="toggleEmergencyMenu()">
-        <div class="emergency-title">
-          <i class="fa-solid fa-phone-volume"></i>
-          <span style="text-decoration:underline;">Panggilan Darurat</span>
-        </div>
-        <i id="emergencyArrow" class="fa-solid fa-chevron-down"></i>
-      </div>
-      <div id="emergencyMenu" class="emergency-menu">
-        <div class="emergency-menu-inner">
-          <a href="tel:110" class="menu-item" style="text-decoration:none;">
-            <div class="menu-icon-box bg-polri">
-              <img
-                src="https://drive.google.com/thumbnail?id=1fx4m8s6V8xVdJA88ZitWnrqGuQn4T5Lf"
-                alt="Polresta Kendari"
-                style="width:28px;height:28px;object-fit:contain;"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-              <i class="fa-solid fa-shield-cat" style="display:none;"></i>
-            </div>
-            <span class="menu-label">Polres</span>
-          </a>
-          <a href="tel:0401123" class="menu-item" style="text-decoration:none;">
-            <div class="menu-icon-box bg-pln">
-              <img
-                src="https://drive.google.com/thumbnail?id=1wZjFl1ZPyuNYbqJg7bBnTEjpHashH3WR"
-                alt="PLN Kendari"
-                style="width:28px;height:28px;object-fit:contain;"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-              <i class="fa-solid fa-bolt" style="display:none;"></i>
-            </div>
-            <span class="menu-label">PLN</span>
-          </a>
-          <a href="tel:112" class="menu-item" style="text-decoration:none;">
-            <div class="menu-icon-box bg-pemkot">
-              <img
-                src="https://drive.google.com/thumbnail?id=1RBXqK7wF1Ht60-KArWBfcDXGYTAllPgL"
-                alt="Pemkot Kendari"
-                style="width:28px;height:28px;object-fit:contain;"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-              <i class="fa-solid fa-building-flag" style="display:none;"></i>
-            </div>
-            <span class="menu-label">Pemkot</span>
-          </a>
-          <a href="https://wa.me/" target="_blank"
-            class="menu-item" style="text-decoration:none;">
-            <div class="menu-icon-box bg-damkar">
-              <img
-                src="https://drive.google.com/thumbnail?id=1dndffo1XK-ETrpCFw2wWK82vMtOHmh98"
-                alt="Damkar Kendari"
-                style="width:28px;height:28px;object-fit:contain;"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-              <i class="fa-solid fa-fire-extinguisher" style="display:none;"></i>
-            </div>
-            <span class="menu-label">Damkar</span>
-          </a>
-          <a href="tel:6282311173113"
-            class="menu-item" style="text-decoration:none;">
-            <div class="menu-icon-box bg-ambulans">
-              <img
-                src="https://drive.google.com/thumbnail?id=1kkgUs6iGCFCx0LvvU6nDKGB1nrE2fNtV"
-                alt="Ambulans ASR"
-                style="width:28px;height:28px;object-fit:contain;"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-              <i class="fa-solid fa-truck-medical" style="display:none;"></i>
-            </div>
-            <span class="menu-label">Ambulans</span>
-          </a>
-        </div>
-      </div>
-      <footer class="app-footer">
-        <div class="footer-copy">
-          Powered by <strong>Anto</strong> Design Concept &copy; 2026
-        </div>
-      </footer>
-    </section>
-  </div>
-
-  <!-- ================= 2. DASHBOARD ================= -->
-  <div id="dashboardView" class="dashboard-view">
-    <header class="dash-header">
-      <div class="header-nav-bar">
-        <div class="nav-left-brand">
-          <div class="nav-btn-icon" onclick="toggleSidebar(true)">
-            <i class="fa-solid fa-bars"></i>
-          </div>
-          <span class="app-version-tag">MySAPA</span>
-        </div>
-        <div class="header-user-profile">
-          <button class="btn-exit" onclick="logout()">
-            <i class="fas fa-power-off"></i>
-          </button>
-        </div>
-      </div>
-      <div class="dash-date-badge">
-        <i class="fa-regular fa-calendar-days"></i>
-        <span id="currentDateText">Minggu, 6 September 2026</span>
-      </div>
-      <div>
-        <div class="greeting-subtitle" id="timeGreeting">
-          Selamat Pagi,
-        </div>
-        <div class="user-name-row">
-          <div class="user-name-display" id="dashUserName">
-            Nama Warga
-          </div>
-          <button
-            class="btn-data-pribadi-header"
-            onclick="openAppPage('Data Pribadi', BASE_URLS.dataPribadi)">
-            <i class="fa-solid fa-id-badge"></i>
-            <span>Data Pribadi</span>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <!-- SURAT PENGANTAR -->
-    <section class="surat-card-floating">
-      <div class="surat-card">
-        <div class="surat-info">
-          <div class="surat-title">Surat Pengantar RT</div>
-          <div class="surat-desc">
-            Saatnya pengajuan surat dilakukan secara online, mandiri, dan cepat.
-          </div>
-        </div>
-        <button
-          class="btn-ajukan"
-          onclick="openAppPage('Surat Pengantar RT', BASE_URLS.ajukanSurat)">
-          <i class="fa-solid fa-paper-plane"></i>
-          <span>Ajukan Sekarang</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- STANDAR PELAYANAN -->
-    <div class="scroll-gallery-wrapper">
-      <section class="menu-section">
-        <div class="informasi-data-title">
-          <div class="informasi-data-judul">
-            <i class="fa-solid fa-file-contract" style="color:#0284c7;"></i>
-            <span>Standar Pelayanan</span>
-          </div>
-        </div>
-      </section>
-      
-      <div id="imageGallerySP" class="scroll-gallery-container">
-        <div class="loading-text">Memuat data...</div>
+      <div class="sync-badge">
+        <div class="pulse-dot"></div>
+        <span id="lastSync">Syncing...</span>
       </div>
     </div>
 
-    <!-- FITUR UTAMA -->
-    <section class="menu-section">
-      <div class="section-title">
-        <i class="fa-solid fa-hands-praying" style="color:#10b981;"></i>
-        <span>Fitur Utama</span>
-      </div>
-      <div class="menu-grid">
-        <div class="menu-item"
-          onclick="openAppPage('Arsip dan Inventaris', BASE_URLS.arsip)">
-          <div class="menu-icon-box bg-arsip">
-            <i class="fa-solid fa-box-archive"></i>
-          </div>
-          <span class="menu-label">Arsip & Inventaris</span>
-        </div>
-        <div class="menu-item"
-          onclick="openAppPage('Ronda Malam', BASE_URLS.ronda)">
-          <div class="menu-icon-box bg-ronda menu-alert">
-            <i class="fa-solid fa-shield-halved"></i>
-          </div>
-          <span class="menu-label">Ronda Malam</span>
-        </div>
-        <div class="menu-item"
-          onclick="openAppPage('Informasi Aktual', BASE_URLS.infoAktual)">
-          <div class="menu-icon-box bg-tanya menu-alert">
-            <i class="fa-solid fa-bell"></i>
-          </div>
-          <span class="menu-label">Info Aktual</span>
-        </div>
-        <div class="menu-item"
-          onclick="openAppPage('Program Kerja', BASE_URLS.programKerja)">
-          <div class="menu-icon-box bg-program">
-            <i class="fa-solid fa-clipboard-list"></i>
-          </div>
-          <span class="menu-label">Program Kerja</span>
+    <div class="header-stats">
+      <div class="stat-item">
+        <div class="stat-num" id="valKK">0</div>
+        <div class="stat-label">
+          <i class="fa-solid fa-house-user" style="color: #FFD166;"></i> Total KK
         </div>
       </div>
-
-      <!-- MENU LAINNYA -->
-      <div id="otherFeaturesMenu" class="other-features-menu">
-        <div class="other-features-inner">
-          <div class="menu-item"
-            onclick="openAppPage('Data Pribadi', BASE_URLS.dataPribadi)">
-            <div class="menu-icon-box bg-profil">
-              <i class="fa-solid fa-id-badge"></i>
-            </div>
-            <span class="menu-label">Data Pribadi</span>
-          </div>
-          <div class="menu-item"
-            onclick="openAppPage('Data Statistik', BASE_URLS.infoData)">
-            <div class="menu-icon-box bg-info-data">
-              <i class="fa-solid fa-chart-pie"></i>
-            </div>
-            <span class="menu-label">Data Statistik</span>
-          </div>
-          <div class="menu-item"
-            onclick="openAppPage('Surat Pengantar', BASE_URLS.ajukanSurat)">
-            <div class="menu-icon-box bg-pbb">
-              <i class="fa-solid fa-paper-plane"></i>
-            </div>
-            <span class="menu-label">Surat Pengantar</span>
-          </div>
-          <div class="menu-item"
-            onclick="openAppPage('Profil RT', BASE_URLS.profil)">
-            <div class="menu-icon-box bg-profil">
-              <i class="fa-solid fa-house-flag"></i>
-            </div>
-            <span class="menu-label">Profil RT</span>
-          </div>
-          <div id="btnPbb"
-            class="menu-item"
-            onclick="openAppPage('ePBB', BASE_URLS.pbb)">
-            <div class="menu-icon-box bg-pbb">
-              <i class="fa-solid fa-money-bill-wave"></i>
-            </div>
-            <span class="menu-label">ePBB</span>
-          </div>
-          <div id="btnAdmin"
-            class="menu-item admin-btn-target"
-            onclick="handleAdminClick()">
-            <div class="menu-icon-box bg-admin">
-              <i class="fa-solid fa-user-gear"></i>
-            </div>
-            <span class="menu-label">Admin</span>
-          </div>
-          <div id="btnDatabase"
-            class="menu-item database-btn-target"
-            onclick="handleDatabaseClick()">
-            <div class="menu-icon-box bg-dbase">
-              <i class="fa-solid fa-database"></i>
-            </div>
-            <span class="menu-label">Database</span>
-          </div>
-          <div id="btnPolling" class="menu-item polling-btn-target disabled" onclick="handlePollingClick()">
-            <div class="menu-icon-box bg-polling">
-              <i class="fa-solid fa-square-poll-vertical"></i>
-            </div>
-            <span class="menu-label">Polling</span>
-          </div>
-          <div class="menu-item"
-            onclick="openAppPage('Tanya Jawab', BASE_URLS.tanyaJawab)">
-            <div class="menu-icon-box bg-tanya">
-              <i class="fa-solid fa-comments"></i>
-            </div>
-            <span class="menu-label">FAQ</span>
-          </div>
+      <div class="stat-item">
+        <div class="stat-num" id="valJiwa">0</div>
+        <div class="stat-label">
+          <i class="fa-solid fa-people-group" style="color: #6EE7B7;"></i> Total Jiwa
         </div>
       </div>
-      <div class="other-features-header" onclick="toggleOtherFeatures()">
-        <span id="otherFeaturesText">Lainnya</span>
-        <i id="otherFeaturesIcon" class="fa-solid fa-chevron-down"></i>
-      </div>
-      <div class="section-divider-utama"></div>
-    </section>
-
-    <!-- INFORMASI DATA -->
-    <div class="scroll-gallery-wrapper">
-      <section class="menu-section informasi-data-section">
-        <div class="informasi-data-title">
-          <div class="informasi-data-judul">
-            <i class="fa-solid fa-chart-pie" style="color:#0284c7;"></i>
-            <span>Data Statistik</span>
-          </div>
-          <div
-            class="informasi-data-link"
-            onclick="openAppPage('Data Statistik', BASE_URLS.infoData)">
-            Lihat semua
-          </div>
-        </div>
-      </section>
-      <div id="imageGallery" class="scroll-gallery-container">
-        <div class="loading-text">Memuat data...</div>
-      </div>
-    </div>
-    <div class="section-divider"></div>
-    <footer class="app-footer">
-      <div class="visitor-badge">
-        <i class="fa-solid fa-users"></i>
-        <span>
-          Pengunjung hari ini:
-          <strong id="visitorCountVal">1</strong>
-        </span>
-      </div>
-      <div class="footer-copy">
-        Powered by Anto Design Concept &copy; 2026
-      </div>
-    </footer>
-  </div>
-
-  <!-- ================= BOTTOM NAVBAR ================= -->
-  <nav id="bottomNavbar" class="bottom-navbar" aria-label="Navigasi utama">
-    <button class="bottom-nav-item" onclick="logout()">
-      <i class="fas fa-power-off"></i>
-      <span>Logout</span>
-    </button>
-    <button class="bottom-nav-item" onclick="openAppPage('Surat Pengantar RT', BASE_URLS.ajukanSurat)">
-      <i class="fa-solid fa-paper-plane"></i>
-      <span>Pengantar</span>
-    </button>
-    <button class="bottom-nav-item bottom-nav-center" onclick="openAppPage('Data Pribadi', BASE_URLS.dataPribadi)">
-      <i class="fa-solid fa-id-badge"></i>
-      <span>MyData</span>
-    </button>
-    <button class="bottom-nav-item" onclick="openAppPage('Data Statistik', BASE_URLS.infoData)">
-      <i class="fa-solid fa-chart-pie"></i>
-      <span>Statistik</span>
-    </button>
-    <button class="bottom-nav-item" onclick="openAppPage('Profil RT', BASE_URLS.profil)">
-      <i class="fa-solid fa-house-flag"></i>
-      <span>Profil</span>
-    </button>
-  </nav>
-
-  <!-- ================= 3. SIDEBAR ================= -->
-  <div
-    id="sidebarBackdrop"
-    class="sidebar-backdrop"
-    onclick="toggleSidebar(false)">
-  </div>
-  <div id="sidebarPanel" class="sidebar-panel">
-    <div class="sidebar-header">
-      <div class="sidebar-title">
-        Menu Utama
-      </div>
-      <div class="nav-btn-icon" onclick="toggleSidebar(false)">
-        <i class="fa-solid fa-xmark"></i>
-      </div>
-    </div>
-    <div class="sidebar-content">
-      <ul class="sidebar-menu-list">
-        <li class="sidebar-menu-item"
-          onclick="openAppFromSidebar('Data Pribadi', BASE_URLS.dataPribadi)">
-          <i class="fa-solid fa-id-badge" style="color:#0284c7;"></i>
-          Data Pribadi
-        </li>
-        <li class="sidebar-menu-item"
-          onclick="openAppFromSidebar('Surat Pengantar RT', BASE_URLS.ajukanSurat)">
-          <i class="fa-solid fa-paper-plane" style="color:#10b981;"></i>
-          Surat Pengantar
-        </li>
-        <li class="sidebar-menu-item"
-          onclick="openAppFromSidebar('Data Statistik', BASE_URLS.infoData)">
-          <i class="fa-solid fa-chart-pie" style="color:#0284c7;"></i>
-          Data Statistik
-        </li>
-        <li class="sidebar-menu-item"
-          onclick="openAppFromSidebar('Arsip dan Inventaris', BASE_URLS.arsip)">
-          <i class="fa-solid fa-box-archive" style="color:#d97706;"></i>
-          Arsip dan Inventaris
-        </li>
-        <li class="sidebar-menu-item"
-          onclick="openAppFromSidebar('Ronda Malam', BASE_URLS.ronda)">
-          <i class="fa-solid fa-shield-halved" style="color:#16a34a;"></i>
-          Ronda Malam
-        </li>
-        <li class="sidebar-menu-item"
-          onclick="openAppFromSidebar('Profil RT', BASE_URLS.profil)">
-          <i class="fa-solid fa-house-flag" style="color:#4f46e5;"></i>
-          Profil RT
-        </li>
-        <li class="sidebar-menu-item"
-          onclick="openAppFromSidebar('Program Kerja', BASE_URLS.programKerja)">
-          <i class="fa-solid fa-clipboard-list" style="color:#9333ea;"></i>
-          Program Kerja
-        </li>
-        <li class="sidebar-menu-item"
-          onclick="openAppFromSidebar('Tanya Jawab', BASE_URLS.tanyaJawab)">
-          <i class="fa-solid fa-comments" style="color:#ea580c;"></i>
-          Tanya Jawab
-        </li>
-        
-      <button class="sidebar-logout-btn" onclick="logout()">
-        <i class="fa-solid fa-right-from-bracket"></i>
-        <span>Logout / Keluar</span>
-      </button>
-    </ul>
     </div>
   </div>
 
-  <!-- ================= 4. SUB-PAGE ================= -->
-  <div id="subPageView" class="subpage-view">
-    <div id="progressBar" class="progress-bar-container">
-      <div class="progress-bar-fill"></div>
+  <!-- Main Content Area -->
+  <div class="content-section">
+    <div class="section-title">
+      <span>Kategori Data Infografis</span>
+      <span style="font-size: 12px; font-weight: 600; color: var(--bri-blue);">4 Kategori Utama</span>
     </div>
-    <div class="subpage-header">
-      <button class="btn-subpage-back" onclick="closeAppPage()">
-        <i class="fa-solid fa-arrow-left"></i>
-      </button>
-      <div id="subPageTitle" class="subpage-title">
-        Halaman Layanan
+
+    <!-- Accordion Category List -->
+    <div class="category-list">
+      <!-- Kategori 1: Informasi Data Warga -->
+      <div class="category-item active full-width-pc">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <div class="category-title-group">
+            <div class="category-icon-badge">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="category-text-box">
+              <h2>Data Demografi</h2>
+              <span>Jender dan Status Domisili</span>
+            </div>
+          </div>
+          <div class="toggle-arrow">
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="category-body">
+          <div class="inner-grid-2col">
+            <!-- Donut Chart Gender -->
+            <div class="chart-box">
+              <h4><i class="fa-solid fa-venus-mars" style="color: var(--bri-blue);"></i> Komposisi Jenis Kelamin</h4>
+              <div style="height: 220px; position: relative;">
+                <canvas id="genderChart"></canvas>
+              </div>
+            </div>
+            <!-- Table Status Warga (3 Kolom: Status, KK, Jiwa) -->
+            <div class="chart-box">
+              <h4><i class="fa-solid fa-address-card" style="color: var(--bri-blue);"></i> Rincian Status Domisili</h4>
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Jenis Status</th>
+                    <th style="text-align: right;">KK</th>
+                    <th style="text-align: right;">Jiwa</th>
+                  </tr>
+                </thead>
+                <tbody id="tableStatusBody">
+                  <tr><td colspan="3" style="text-align:center;">Memuat data...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kategori 2: Informasi Warga Prioritas -->
+      <div class="category-item">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <div class="category-title-group">
+            <div class="category-icon-badge">
+              <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <div class="category-text-box">
+              <h2>Warga Prioritas</h2>
+              <span>Disabilitas, Lansia, Balita, dll.</span>
+            </div>
+          </div>
+          <div class="toggle-arrow">
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="category-body">
+          <div class="chart-box">
+            <h4><i class="fa-solid fa-chart-column" style="color: var(--bri-accent-orange);"></i> Jumlah Warga Prioritas</h4>
+            <div style="height: 240px; position: relative;">
+              <canvas id="prioritasChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kategori 3: Informasi Penerima Manfaat -->
+      <div class="category-item">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <div class="category-title-group">
+            <div class="category-icon-badge">
+              <i class="fa-solid fa-hand-holding-heart"></i>
+            </div>
+            <div class="category-text-box">
+              <h2>Penerima Manfaat</h2>
+              <span>Pelayanan dan Bantuan Sosial</span>
+            </div>
+          </div>
+          <div class="toggle-arrow">
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="category-body">
+          <div id="penerimaList">
+            <p class="text-muted" style="font-size: 12px;">Memuat data...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kategori 4: Informasi Jenjang Pendidikan -->
+      <div class="category-item full-width-pc">
+        <div class="category-header" onclick="toggleCategory(this)">
+          <div class="category-title-group">
+            <div class="category-icon-badge">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="category-text-box">
+              <h2>Jenjang Pendidikan</h2>
+              <span>Distribusi Pendidikan Terakhir Warga</span>
+            </div>
+          </div>
+          <div class="toggle-arrow">
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="category-body">
+          <div class="chart-box">
+            <h4><i class="fa-solid fa-chart-bar" style="color: var(--bri-green);"></i> Distribusi Tingkat Pendidikan</h4>
+            <div style="height: 250px; position: relative;">
+              <canvas id="pendidikanChart"></canvas>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <iframe
-      id="subPageIframe"
-      class="subpage-iframe"
-      src="about:blank"
-      onload="onIframeLoaded()">
-    </iframe>
+  </div>
+
+  <!-- App Footer -->
+  <div class="app-footer">
+    <div class="footer-logo">
+      <i class="fa-solid fa-shield-halved" style="color: var(--bri-blue);"></i> MySAPA
+    </div>
+    <div>Sistem Informasi & Pelayanan Administrasi</div>
+    <div style="margin-top: 4px; opacity: 0.7;">Powered by Anto Design Concept &copy; 2026</div>
   </div>
 </div>
 
-  <!-- ================= MODAL POLLING ================= -->
-  <div id="pollingAdminModal" class="polling-modal-backdrop" aria-hidden="true">
-    <div class="polling-modal" role="dialog" aria-modal="true" aria-labelledby="pollingAdminTitle">
-      <div class="polling-modal-header">
-        <div id="pollingAdminTitle" class="polling-modal-title"><i class="fa-solid fa-square-poll-vertical" style="color:#2563eb;"></i> Kelola Polling</div>
-        <button class="polling-close" type="button" onclick="closePollingModal('pollingAdminModal')"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div class="polling-form-group">
-        <label class="polling-form-label" for="pollingDescription">Deskripsi / Pertanyaan Polling</label>
-        <textarea id="pollingDescription" class="polling-textarea" maxlength="1000" placeholder="Tuliskan pertanyaan atau deskripsi polling..."></textarea>
-        <div class="polling-char-count"><span id="pollingCharCount">0</span>/1000 karakter</div>
-      </div>
-      <div class="polling-form-group">
-        <label class="polling-form-label" for="pollingDeadline">Batas Waktu Polling</label>
-        <input id="pollingDeadline" class="polling-datetime" type="datetime-local" onchange="updatePollingAdminControls()">
-      </div>
-      <div class="polling-form-group">
-        <div class="polling-check-row">
-          <label class="polling-check-card"><input id="pollingActiveCheck" type="checkbox" onchange="updatePollingAdminControls()"><span>Polling</span></label>
-          <label class="polling-check-card"><input id="pollingResultCheck" type="checkbox" onchange="updatePollingAdminControls()"><span>Hasil</span></label>
-        </div>
-        <div class="polling-note">Ceklis <b>Polling</b> hanya dapat aktif jika batas waktu sudah ditentukan dan belum lewat. Ceklis <b>Hasil</b> menutup polling dan menampilkan hasil kepada warga.</div>
-      </div>
-      <div class="polling-actions">
-        <button class="polling-btn polling-btn-secondary" type="button" onclick="startNewPolling()"><i class="fa-solid fa-plus"></i> Polling Baru</button>
-        <button class="polling-btn polling-btn-primary" type="button" onclick="saveAdminPolling()"><i class="fa-solid fa-floppy-disk"></i> Simpan</button>
-      </div>
-      <div id="pollingAdminMessage" class="polling-note" style="display:none;"></div>
-    </div>
-  </div>
-
-  <div id="pollingUserModal" class="polling-modal-backdrop" aria-hidden="true">
-    <div class="polling-modal" role="dialog" aria-modal="true" aria-labelledby="pollingUserTitle">
-      <div class="polling-modal-header">
-        <div id="pollingUserTitle" class="polling-modal-title"><i class="fa-solid fa-square-poll-vertical" style="color:#2563eb;"></i> Polling Warga</div>
-        <button class="polling-close" type="button" onclick="closePollingModal('pollingUserModal')"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div id="pollingUserContent"></div>
-    </div>
-  </div>
-
-  <!-- MODAL KONFIRMASI POLLING -->
-  <div id="pollingConfirmModal" class="polling-modal-backdrop" aria-hidden="true">
-    <div class="polling-modal" style="max-width:420px; text-align:center;" role="dialog" aria-modal="true" aria-labelledby="pollingConfirmTitle">
-      <div class="polling-modal-header" style="justify-content:center; margin-bottom:12px;">
-        <div id="pollingConfirmTitle" class="polling-modal-title">
-          <i class="fa-solid fa-circle-question" style="color:#2563eb;"></i> Konfirmasi Polling
-        </div>
-      </div>
-      <div id="pollingConfirmText" style="font-size:14px; font-weight:700; color:#0f172a; margin:16px 0 24px; line-height:1.5;">
-        Anda setuju dengan rencana/kebijakan RT?
-      </div>
-      <div class="polling-actions" style="margin-top:0;">
-        <button class="polling-btn polling-btn-secondary" type="button" onclick="closePollingModal('pollingConfirmModal')">Tidak</button>
-        <button class="polling-btn polling-btn-primary" type="button" onclick="confirmSubmitPollingChoice()">Ya</button>
-      </div>
-    </div>
-  </div>
-
 <script>
-  // ==========================================================
-  // URL API APPS SCRIPT
-  // ==========================================================
-  const API_URL =
-    'https://script.google.com/macros/s/AKfycbx2EDwltmwL0w_CzOnjAqRHltkL3qnyIo6jhHc6QX7PMpRQSxqLgSCE1XAgiZoIMisBJA/exec';
+Chart.register(ChartDataLabels);
+let chartGender = null;
+let chartPrioritas = null;
+let chartPendidikan = null;
+let totalKKGlobal = 1;
 
-  // ==========================================================
-  // DATA USER
-  // ==========================================================
-  let currentUser = {
-    nik: '',
-    nama: '',
-    gender: '',
-    visitorCount: 1,
-    isAdmin: false,
-    isDatabaseUser: false
-  };
-  let isSubPageOpen = false;
-
-  // ==========================================================
-  // URL HALAMAN LAIN
-  // ==========================================================
-  const BASE_URLS = {
-    dataPribadi: "https://script.google.com/macros/s/AKfycbzF3aQi0d4Ue0HfEQzQdvZBaOl7VLaGBK5UJePUwzZe9n_xsqfHvBoeyrRZouV-U_tC/exec",
-    ajukanSurat: "https://script.google.com/macros/s/AKfycbw6tX6ZyEndNZrGnLp2EPOLOXtZp5QfmUhnkTI1CKprSFxlxHFPQulbpHbEQ33pG6jM/exec",
-    infoData: "https://mysapa.github.io/infodata",
-    programKerja: "https://mysapa.github.io/proker",
-    admin: "https://script.google.com/macros/s/AKfycbyNLJUvE3D02yJxKUeod5KzADNFCR6raiYUVX--8lb-FJyzhWIXMpaGiSSxUodtMVBa/exec",
-    infoAktual: "https://script.google.com/macros/s/AKfycbx5mfHA0OqJbkkseSGCAQb1lRsBhq6_eCsc03hK_xH89aEr983JTgfiGasbBzivRjSx/exec",
-    tanyaJawab: "https://mysapa.github.io/faq",
-    ronda: "https://mysapa.github.io/ronda",
-    arsip: "https://mysapa.github.io/arsip",
-    profil: "https://script.google.com/macros/s/AKfycbxSLVFxMUnAy0G53_JBRMtsgrnRQSZUjhSvJOcmBlYH5u5S0ry1UayD4F0ySwLlqxA/exec",
-    pbb: "https://e-pbb.kendarikota.go.id/nop/index",
-    database: "https://mysapa.github.io/dbase"
-  };
-
-  // ==========================================================
-  // PEMANGGIL API JSONP
-  // ==========================================================
-
-  // ==========================================================
-  // PELACAKAN PERMINTAAN UNTUK LAYAR PEMBUKA
-  // ==========================================================
-  function finishSapaIntroRequest() {
-    if (window.SAPAIntroPendingRequests > 0) window.SAPAIntroPendingRequests--;
-    if (typeof window.sapaIntroTryHide === 'function') window.sapaIntroTryHide();
-  }
-
-  function callAPI(action, params, successCallback, errorCallback) {
-    window.SAPAIntroPendingRequests = (window.SAPAIntroPendingRequests || 0) + 1;
-    const callbackName =
-      'sapaCallback_' +
-      Date.now() +
-      '_' +
-      Math.floor(Math.random() * 10000);
-    const script = document.createElement('script');
-    let url =
-      API_URL +
-      '?action=' +
-      encodeURIComponent(action) +
-      '&callback=' +
-      callbackName;
-    if (params) {
-      Object.keys(params).forEach(function(key) {
-        url +=
-          '&' +
-          encodeURIComponent(key) +
-          '=' +
-          encodeURIComponent(params[key]);
-      });
+function toggleCategory(headerEl) {
+  const currentItem = headerEl.parentElement;
+  const allItems = document.querySelectorAll('.category-item');
+  allItems.forEach(item => {
+    if (item !== currentItem) {
+      item.classList.remove('active');
     }
-    let finished = false;
-    window[callbackName] = function(response) {
-      finished = true;
-      try {
-        if (successCallback) {
-          successCallback(response);
-        }
-      } finally {
-        delete window[callbackName];
-        script.remove();
-        finishSapaIntroRequest();
-      }
-    };
-    script.onerror = function() {
-      if (finished) return;
-      finished = true;
-      delete window[callbackName];
-      script.remove();
-      try {
-        if (errorCallback) {
-          errorCallback();
-        }
-      } finally {
-        finishSapaIntroRequest();
-      }
-    };
-    script.src = url;
-    document.body.appendChild(script);
-  }
-
-  // ==========================================================
-  // ENTER DENGAN KEYBOARD
-  // ==========================================================
-  function handleKeyPress(event) {
-    if (event.key === 'Enter') {
-      processLogin();
-    }
-  }
-
-  // ==========================================================
-  // SAPAAN
-  // ==========================================================
-  function getDynamicGreeting() {
-    const hours = new Date().getHours();
-    if (hours >= 4 && hours < 11) {
-      return "Selamat Pagi,";
-    }
-    if (hours >= 11 && hours < 15) {
-      return "Selamat Siang,";
-    }
-    if (hours >= 15 && hours < 18) {
-      return "Selamat Sore,";
-    }
-    return "Selamat Malam,";
-  }
-
-  // ==========================================================
-  // TANGGAL HEADER
-  // ==========================================================
-  function setFormattedHeaderDate() {
-    const now = new Date();
-    const options = {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    };
-    const dateString =
-      now.toLocaleDateString('id-ID', options);
-    const el =
-      document.getElementById('currentDateText');
-    if (el) {
-      el.textContent = dateString;
-    }
-  }
-
-  // ==========================================================
-  // LOGIN
-  // ==========================================================
-  function processLogin() {
-    const nikVal =
-      document.getElementById('nikInput').value.trim();
-    const errorDiv =
-      document.getElementById('loginError');
-    const btnText =
-      document.getElementById('btnText');
-    const btnIcon =
-      document.getElementById('btnIcon');
-    const btnSpinner =
-      document.getElementById('btnSpinner');
-    const btnLogin =
-      document.getElementById('btnLogin');
-    if (!nikVal) {
-      showError("Silakan masukkan NIK terlebih dahulu.");
-      return;
-    }
-    errorDiv.style.display = 'none';
-    btnText.textContent = "Verifikasi...";
-    if (btnIcon) {
-      btnIcon.style.display = 'none';
-    }
-    btnSpinner.style.display = 'inline-block';
-    btnLogin.disabled = true;
-    callAPI(
-      'login',
-      { nik: nikVal },
-      function(res) {
-        btnText.textContent = "Masuk";
-        if (btnIcon) {
-          btnIcon.style.display = 'inline-block';
-        }
-        btnSpinner.style.display = 'none';
-        btnLogin.disabled = false;
-        if (res && res.success) {
-          currentUser.nik =
-            res.nik || '';
-          currentUser.nama =
-            res.nama || 'Warga RT 09';
-          currentUser.gender =
-            res.gender || '';
-          currentUser.visitorCount =
-            res.visitorCount || 1;
-          currentUser.isAdmin =
-            res.isAdmin === true;
-          currentUser.isDatabaseUser =
-            res.isDatabaseUser === true;
-          enterDashboard();
-        } else {
-          showError(
-            res && res.message
-              ? res.message
-              : "NIK tidak ditemukan."
-          );
-        }
-      },
-      function() {
-        btnText.textContent = "Masuk";
-        if (btnIcon) {
-          btnIcon.style.display = 'inline-block';
-        }
-        btnSpinner.style.display = 'none';
-        btnLogin.disabled = false;
-        showError(
-          "Terjadi kesalahan koneksi ke server."
-        );
-      }
-    );
-  }
-
-  // ==========================================================
-  // ERROR
-  // ==========================================================
-  function showError(msg) {
-    const errorDiv =
-      document.getElementById('loginError');
-    document.getElementById('errorMsg')
-      .textContent = msg;
-    errorDiv.style.display = 'flex';
-  }
-
-  // ==========================================================
-  // MASUK DASHBOARD
-  // ==========================================================
-  function enterDashboard() {
-    document.getElementById('loginView').style.display = 'none';
-    document.getElementById('dashboardView').style.display = 'flex';
-    
-    const bottomNav = document.getElementById('bottomNavbar');
-    if (bottomNav) {
-      bottomNav.style.display = 'grid';
-    }
-
-    document.getElementById('timeGreeting').textContent = getDynamicGreeting();
-    document.getElementById('dashUserName').textContent = currentUser.nama;
-    document.getElementById('visitorCountVal').textContent = currentUser.visitorCount;
-    setFormattedHeaderDate();
-
-  // ==========================================================
-  // VISIBILITAS MENU BERDASARKAN ROLE
-  // ==========================================================
-  const btnAdmin = document.getElementById('btnAdmin');
-  const btnDatabase = document.getElementById('btnDatabase');
-  const btnPbb = document.getElementById('btnPbb');
-
-  // ADMIN
-  // Hanya tampil untuk Admin
-  if (btnAdmin) {
-    btnAdmin.classList.toggle(
-      'menu-item-hidden',
-      !currentUser.isAdmin
-    );
-  }
-
-  // DATABASE
-  // Hanya tampil untuk user yang memiliki akses Database
-  if (btnDatabase) {
-    btnDatabase.classList.toggle(
-      'menu-item-hidden',
-      !currentUser.isDatabaseUser
-    );
-  }
-
-  // BAYAR PBB
-  // Disembunyikan khusus untuk Admin
-  if (btnPbb) {
-    btnPbb.classList.toggle(
-      'menu-item-hidden',
-      currentUser.isAdmin
-    );
-  }
-    loadPollingStatus(false);
-    // Pengaman tombol back: beberapa entri history agar back di HP
-    // tidak keluar dari aplikasi saat berada di dashboard
-    pushDashboardBackGuard(DASHBOARD_BACK_GUARD_DEPTH);
-  }
-
-  // ==========================================================
-  // PENGAMAN TOMBOL BACK DI DASHBOARD
-  // ==========================================================
-  const DASHBOARD_BACK_GUARD_DEPTH = 3;
-
-  function pushDashboardBackGuard(count) {
-    for (let i = 0; i < count; i++) {
-      history.pushState({ page: 'dashboard' }, '');
-    }
-  }
-
-  // ==========================================================
-  // ABSEN RONDA DARI LOGIN
-  // ==========================================================
-  function openAbsenRondaDirect() {
-    const iframe =
-      document.getElementById('subPageIframe');
-    const progressBar =
-      document.getElementById('progressBar');
-    document.getElementById('subPageTitle')
-      .innerText = 'Ronda Malam';
-    if (progressBar) {
-      progressBar.style.display = 'block';
-    }
-    iframe.src = BASE_URLS.ronda;
-    if (!isSubPageOpen) {
-      isSubPageOpen = true;
-      history.pushState(
-        { subpageOpen: true },
-        ''
-      );
-    }
-    document.getElementById('subPageView')
-      .classList.add('active');
-  }
-
-  function closeSubpage() {
-    closeAppPage();
-  }
-
-  // ==========================================================
-  // SIDEBAR
-  // ==========================================================
-  function toggleSidebar(show) {
-    const backdrop =
-      document.getElementById('sidebarBackdrop');
-    const panel =
-      document.getElementById('sidebarPanel');
-    if (show) {
-      backdrop.classList.add('active');
-      panel.classList.add('active');
-    } else {
-      backdrop.classList.remove('active');
-      panel.classList.remove('active');
-    }
-  }
-
-  function openAppFromSidebar(title, baseUrl) {
-    toggleSidebar(false);
-    openAppPage(title, baseUrl);
-  }
-
-  // ==========================================================
-  // BUKA SUB-PAGE
-  // ==========================================================
-  function openAppPage(title, baseUrl) {
-    if (!baseUrl || baseUrl === 'about:blank') {
-      return;
-    }
-    let targetUrl = baseUrl;
-    if (currentUser.nik) {
-      const separator =
-        baseUrl.indexOf('?') >= 0
-          ? '&'
-          : '?';
-      targetUrl =
-        baseUrl +
-        separator +
-        'nik=' +
-        encodeURIComponent(currentUser.nik);
-    }
-    document.getElementById('subPageTitle')
-      .textContent = title;
-    document.getElementById('progressBar')
-      .style.display = 'block';
-    const iframe =
-      document.getElementById('subPageIframe');
-    iframe.src = targetUrl;
-    document.getElementById('subPageView')
-      .classList.add('active');
-    if (!isSubPageOpen) {
-      isSubPageOpen = true;
-      history.pushState(
-        { subpageOpen: true },
-        ''
-      );
-    }
-  }
-
-  // ==========================================================
-  // IFRAME SELESAI MEMUAT
-  // ==========================================================
-  function onIframeLoaded() {
-    const progress =
-      document.getElementById('progressBar');
-    if (progress) {
-      progress.style.display = 'none';
-    }
-  }
-
-  // ==========================================================
-  // TUTUP SUB-PAGE
-  // ==========================================================
-  function closeAppPage(fromPopState = false) {
-    const subPage =
-      document.getElementById('subPageView');
-    if (!subPage.classList.contains('active')) {
-      return;
-    }
-    subPage.classList.remove('active');
-    setTimeout(function() {
-      document.getElementById('subPageIframe')
-        .src = 'about:blank';
-    }, 350);
-    if (isSubPageOpen) {
-      isSubPageOpen = false;
-      if (!fromPopState) {
-        history.back();
-      }
-    }
-  }
-
-  // ==========================================================
-  // BROWSER BACK
-  // ==========================================================
-  window.addEventListener(
-    'popstate',
-    function() {
-      if (isSubPageOpen) {
-        closeAppPage(true);
-      } else if (
-        document.getElementById('dashboardView')
-          .style.display === 'flex'
-      ) {
-        // Tombol back ditekan di dashboard: tahan di halaman ini
-        pushDashboardBackGuard(1);
-      }
-    }
-  );
-
-  // ==========================================================
-  // ADMIN
-  // ==========================================================
-  function handleAdminClick() {
-    if (currentUser.isAdmin) {
-      openAppPage(
-        'Admin',
-        BASE_URLS.admin
-      );
-    }
-  }
-
-  // ==========================================================
-  // DATABASE
-  // ==========================================================
-  function handleDatabaseClick() {
-    if (currentUser.isDatabaseUser) {
-      openAppPage(
-        'Database',
-        BASE_URLS.database
-      );
-    }
-  }
-
-  // ==========================================================
-  // GALERI INFORMASI DATA
-  // ==========================================================
-  function loadProfilRTGallery() {
-    callAPI(
-      'profil',
-      null,
-      function(res) {
-        if (!res || !res.success) {
-          document.getElementById('imageGallery')
-            .innerHTML =
-            '<div class="loading-text" style="color:red;">Gagal memuat gambar</div>';
-          return;
-        }
-        renderImageGallery(res.data || []);
-      },
-      function() {
-        document.getElementById('imageGallery')
-          .innerHTML =
-          '<div class="loading-text" style="color:red;">Gagal memuat gambar</div>';
-      }
-    );
-  }
-
-  function renderImageGallery(urls) {
-    const container =
-      document.getElementById('imageGallery');
-    if (!urls || urls.length === 0) {
-      container.innerHTML =
-        '<div class="loading-text">Tidak ada informasi data ditemukan.</div>';
-      return;
-    }
-    let htmlContent = '';
-    urls.forEach(function(url, index) {
-      htmlContent +=
-        '<div class="gallery-card">';
-      htmlContent +=
-        '<img src="' +
-        escapeHtml(url) +
-        '" alt="Informasi ' +
-        (index + 1) +
-        '" loading="lazy" ';
-      htmlContent +=
-        'onerror="this.src=\'https://via.placeholder.com/150x100?text=Gambar+Error\';">';
-      htmlContent +=
-        '</div>';
-    });
-    container.innerHTML = htmlContent;
-  }
-
-  // ==========================================================
-  // GALERI STANDAR PELAYANAN
-  // ==========================================================
-  function loadStandarPelayananGallery() {
-    callAPI(
-      'standar',
-      null,
-      function(res) {
-        const container =
-          document.getElementById('imageGallerySP');
-        if (!container) {
-          return;
-        }
-        if (!res || !res.success) {
-          container.innerHTML =
-            '<div class="loading-text" style="color:red;">Gagal memuat gambar.</div>';
-          return;
-        }
-        const imageUrls =
-          res.data || [];
-        if (imageUrls.length === 0) {
-          container.innerHTML =
-            '<div class="loading-text">Tidak ada data standar pelayanan.</div>';
-          return;
-        }
-        let html = '';
-        imageUrls.forEach(function(url) {
-          html +=
-            '<div class="gallery-card-sp">' +
-            '<img src="' +
-            escapeHtml(url) +
-            '" alt="Standar Pelayanan">' +
-            '</div>';
-        });
-        container.innerHTML = html;
-      },
-      function() {
-        const container =
-          document.getElementById('imageGallerySP');
-        if (container) {
-          container.innerHTML =
-            '<div class="loading-text" style="color:red;">Gagal memuat gambar.</div>';
-        }
-      }
-    );
-  }
-
-  // ==========================================================
-  // HEADER LOGIN
-  // ==========================================================
-  function loadLoginHeaderImage() {
-    callAPI(
-      'header',
-      null,
-      function(res) {
-        if (!res || !res.success) {
-          return;
-        }
-        const urls =
-          res.data || [];
-        if (urls.length === 0) {
-          return;
-        }
-        const rawUrl =
-          String(urls[0]).trim();
-        if (!rawUrl) {
-          return;
-        }
-        const imgEl =
-          document.getElementById('loginHeaderImg');
-        const containerEl =
-          document.getElementById('loginHeaderContainer');
-        if (!imgEl || !containerEl) {
-          return;
-        }
-        imgEl.removeAttribute('src');
-        let imageUrl = rawUrl;
-        const separator =
-          imageUrl.indexOf('?') >= 0
-            ? '&'
-            : '?';
-        imageUrl +=
-          separator +
-          'v=' +
-          new Date().getTime();
-        containerEl.style.display = 'none';
-        imgEl.onload = function() {
-          containerEl.style.display = 'block';
-        };
-        imgEl.onerror = function() {
-          console.error(
-            'Gambar header gagal dimuat:',
-            rawUrl
-          );
-          containerEl.style.display = 'none';
-        };
-        imgEl.src = imageUrl;
-      },
-      function() {
-        console.error(
-          'Gagal memuat gambar header login.'
-        );
-      }
-    );
-  }
-
-  // ==========================================================
-  // FORMAT URL GOOGLE DRIVE
-  // ==========================================================
-  function formatDriveImageUrl(url) {
-    if (!url) {
-      return '';
-    }
-    const match =
-      url.match(/[-\w]{25,}/);
-    if (match) {
-      const fileId =
-        match[0];
-      return (
-        'https://lh3.googleusercontent.com/d/' +
-        fileId
-      );
-    }
-    return url;
-  }
-
-  // ==========================================================
-  // ESCAPE HTML
-  // ==========================================================
-  function escapeHtml(value) {
-    return String(value)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
-
-  // ==========================================================
-  // PANGGILAN DARURAT
-  // ==========================================================
-  function toggleEmergencyMenu() {
-    const menu =
-      document.getElementById('emergencyMenu');
-    const arrow =
-      document.getElementById('emergencyArrow');
-    menu.classList.toggle('show');
-    arrow.classList.toggle('open');
-  }
-
-  // ==========================================================
-  // POLLING
-  // ==========================================================
-  let currentPolling = null;
-  let currentPollingAdminId = '';
-  let selectedPollingChoice = '';
-  let pollingTimerInterval = null;
-
-  function closePollingModal(id) {
-    const el = document.getElementById(id);
-    if (el) {
-      el.classList.remove('show');
-      el.setAttribute('aria-hidden', 'true');
-    }
-    if (id === 'pollingUserModal' && pollingTimerInterval) {
-      clearInterval(pollingTimerInterval);
-      pollingTimerInterval = null;
-    }
-  }
-
-  function openPollingModal(id) {
-    const el = document.getElementById(id);
-    if (el) {
-      el.classList.add('show');
-      el.setAttribute('aria-hidden', 'false');
-    }
-  }
-
-  function updatePollingButtonState(status) {
-    const btn = document.getElementById('btnPolling');
-    if (!btn) return;
-    const admin = currentUser.isDatabaseUser === true;
-    const enabled = admin || (status && status.hasPolling && (status.poll && (status.poll.pollingAktif || status.poll.hasilAktif)));
-    btn.classList.toggle('disabled', !enabled);
-    btn.setAttribute('aria-disabled', enabled ? 'false' : 'true');
-    btn.title = admin ? 'Kelola Polling' : (enabled ? 'Buka Polling' : 'Polling belum dibuka');
-  }
-
-  function loadPollingStatus(openAfterLoad) {
-    if (!currentUser.nik) return;
-    callAPI('pollingstatus', { nik: currentUser.nik }, function(res) {
-      if (!res || !res.success) {
-        updatePollingButtonState(null);
-        return;
-      }
-      currentPolling = res;
-      updatePollingButtonState(res);
-      if (openAfterLoad) renderUserPolling(res);
-    }, function() {
-      updatePollingButtonState(null);
-    });
-  }
-
-  function handlePollingClick() {
-    if (!currentUser.nik) return;
-    if (currentUser.isDatabaseUser) {
-      openAdminPolling();
-      return;
-    }
-    callAPI('pollingstatus', { nik: currentUser.nik }, function(res) {
-      if (!res || !res.success) {
-        showPollingToast(res && res.message ? res.message : 'Data polling tidak dapat dimuat.');
-        return;
-      }
-      currentPolling = res;
-      updatePollingButtonState(res);
-      if (!(res.poll && (res.poll.pollingAktif || res.poll.hasilAktif))) {
-        return;
-      }
-      renderUserPolling(res);
-    }, function() {
-      showPollingToast('Terjadi kesalahan koneksi saat memuat polling.');
-    });
-  }
-
-  function openAdminPolling() {
-    document.getElementById('pollingDescription').value = '';
-    document.getElementById('pollingDeadline').value = '';
-    document.getElementById('pollingActiveCheck').checked = false;
-    document.getElementById('pollingResultCheck').checked = false;
-    currentPollingAdminId = '';
-    document.getElementById('pollingAdminMessage').style.display = 'none';
-    openPollingModal('pollingAdminModal');
-
-    callAPI('pollingadmin', { nik: currentUser.nik }, function(res) {
-      if (!res || !res.success) {
-        showPollingAdminMessage(res && res.message ? res.message : 'Gagal memuat polling.', true);
-        return;
-      }
-      if (res.hasPolling && res.poll) {
-        currentPollingAdminId = res.poll.id || '';
-        document.getElementById('pollingDescription').value = res.poll.deskripsi || '';
-        document.getElementById('pollingDeadline').value = normalizeDatetimeLocal(res.poll.batasWaktu || '');
-        document.getElementById('pollingActiveCheck').checked = !!res.poll.pollingAktif;
-        document.getElementById('pollingResultCheck').checked = !!res.poll.hasilAktif;
-        updatePollingCharCount();
-        updatePollingAdminControls();
-      }
-    }, function() {
-      showPollingAdminMessage('Gagal memuat data polling.', true);
-    });
-  }
-
-  function startNewPolling() {
-    currentPollingAdminId = '';
-    document.getElementById('pollingDescription').value = '';
-    document.getElementById('pollingDeadline').value = '';
-    document.getElementById('pollingActiveCheck').checked = false;
-    document.getElementById('pollingResultCheck').checked = false;
-    updatePollingCharCount();
-    updatePollingAdminControls();
-    document.getElementById('pollingDescription').focus();
-  }
-
-  function normalizeDatetimeLocal(value) {
-    if (!value) return '';
-    const d = new Date(value);
-    if (isNaN(d.getTime())) return String(value).slice(0,16);
-    const pad = n => String(n).padStart(2, '0');
-    return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()) + 'T' + pad(d.getHours()) + ':' + pad(d.getMinutes());
-  }
-
-  function updatePollingCharCount() {
-    const el = document.getElementById('pollingDescription');
-    const count = document.getElementById('pollingCharCount');
-    if (el && count) count.textContent = el.value.length;
-  }
-
-  function updatePollingAdminControls() {
-    const deadline = document.getElementById('pollingDeadline').value;
-    const active = document.getElementById('pollingActiveCheck');
-    const result = document.getElementById('pollingResultCheck');
-    if (!active || !result) return;
-    const valid = !!deadline && new Date(deadline).getTime() >= Date.now();
-    active.disabled = !valid || result.checked;
-    if (!valid) active.checked = false;
-    if (result.checked) active.checked = false;
-  }
-
-  function saveAdminPolling() {
-    const description = document.getElementById('pollingDescription').value.trim();
-    const deadline = document.getElementById('pollingDeadline').value;
-    const active = document.getElementById('pollingActiveCheck').checked;
-    const result = document.getElementById('pollingResultCheck').checked;
-    if (!description) { showPollingAdminMessage('Deskripsi / pertanyaan wajib diisi.', true); return; }
-    if (description.length > 1000) { showPollingAdminMessage('Deskripsi maksimal 1000 karakter.', true); return; }
-    if (!deadline) { showPollingAdminMessage('Batas waktu wajib ditentukan.', true); return; }
-
-    callAPI('pollingcreate', {
-      nik: currentUser.nik,
-      pollId: currentPollingAdminId,
-      deskripsi: description,
-      batasWaktu: deadline,
-      pollingAktif: active ? '1' : '0',
-      hasilAktif: result ? '1' : '0'
-    }, function(res) {
-      if (res && res.success) {
-        currentPollingAdminId = res.pollId || currentPollingAdminId;
-        showPollingAdminMessage(res.message || 'Data polling telah disimpan.', false);
-        loadPollingStatus(false);
-
-        setTimeout(function() {
-          closePollingModal('pollingAdminModal');
-        }, 1200);
-      } else {
-        showPollingAdminMessage(res && res.message ? res.message : 'Polling gagal disimpan.', true);
-      }
-    }, function() {
-      showPollingAdminMessage('Terjadi kesalahan koneksi saat menyimpan polling.', true);
-    });
-  }
-
-  function showPollingAdminMessage(message, isError) {
-    const el = document.getElementById('pollingAdminMessage');
-    if (!el) return;
-    el.textContent = message;
-    el.style.display = 'block';
-    el.style.color = isError ? '#b91c1c' : '#15803d';
-  }
-
-  function showPollingToast(message) {
-    const el = document.getElementById('pollingUserContent');
-    if (el) el.innerHTML = '<div class="polling-empty">' + escapeHtml(message) + '</div>';
-  }
-
-  function startPollingCountdown(targetDateStr) {
-    if (pollingTimerInterval) clearInterval(pollingTimerInterval);
-    const targetTime = new Date(targetDateStr).getTime();
-    
-    function update() {
-      const el = document.getElementById('pollingCountdownTimer');
-      if (!el) return;
-      const now = Date.now();
-      const diff = targetTime - now;
-      if (isNaN(targetTime) || diff <= 0) {
-        el.textContent = '00:00:00';
-        if (pollingTimerInterval) clearInterval(pollingTimerInterval);
-        return;
-      }
-      const totalSec = Math.floor(diff / 1000);
-      const h = String(Math.floor(totalSec / 3600)).padStart(2, '0');
-      const m = String(Math.floor((totalSec % 3600) / 60)).padStart(2, '0');
-      const s = String(totalSec % 60).padStart(2, '0');
-      el.textContent = h + ':' + m + ':' + s;
-    }
-    
-    update();
-    pollingTimerInterval = setInterval(update, 1000);
-  }
-
-  function renderUserPolling(res) {
-    const content = document.getElementById('pollingUserContent');
-    if (!content || !res || !res.poll) return;
-    const poll = res.poll;
-    let html = '<div class="polling-question">' + escapeHtml(poll.deskripsi) + '</div>';
-    
-    if (poll.batasWaktu) {
-      html += '<div class="polling-info-box">' +
-                '<div class="polling-deadline"><i class="fa-regular fa-clock"></i> Batas Waktu: ' + escapeHtml(formatPollingDate(poll.batasWaktu)) + '</div>' +
-                '<div class="polling-countdown"><i class="fa-solid fa-hourglass-half"></i> Sisa Waktu: <span id="pollingCountdownTimer">00:00:00</span></div>' +
-              '</div>';
-    }
-
-    if (poll.hasilAktif) {
-      html += renderPollingResult(res.counts || {Setuju:0,'Tidak Setuju':0,Abstain:0}, res.total || 0);
-      content.innerHTML = html;
-      openPollingModal('pollingUserModal');
-      return;
-    }
-
-    const familyResponse = res.familyResponse;
-    if (familyResponse) {
-      html += '<div class="polling-family-note">Keluarga Anda telah memberikan pendapatnya yaitu <b>' + escapeHtml(familyResponse) + '</b> dengan rencana/kebijakan RT.</div>';
-      html += '<div class="polling-choice-grid" style="margin-top:15px;">';
-      html += pollingChoiceButton('Setuju','fa-solid fa-thumbs-up',true);
-      html += pollingChoiceButton('Tidak Setuju','fa-solid fa-thumbs-down',true);
-      html += pollingChoiceButton('Abstain','fa-solid fa-minus',true);
-      html += '</div>';
-    } else if (poll.pollingAktif) {
-      html += '<div class="polling-choice-grid">';
-      html += pollingChoiceButton('Setuju','fa-solid fa-thumbs-up',false);
-      html += pollingChoiceButton('Tidak Setuju','fa-solid fa-thumbs-down',false);
-      html += pollingChoiceButton('Abstain','fa-solid fa-minus',false);
-      html += '</div>';
-    } else {
-      html += '<div class="polling-empty">Polling belum dibuka atau sudah berakhir.</div>';
-    }
-    content.innerHTML = html;
-    openPollingModal('pollingUserModal');
-
-    if (poll.batasWaktu && poll.pollingAktif && !poll.hasilAktif) {
-      startPollingCountdown(poll.batasWaktu);
-    }
-  }
-
-  function pollingChoiceButton(label, icon, disabled) {
-    let typeClass = '';
-    if (label === 'Setuju') typeClass = ' polling-choice-setuju';
-    else if (label === 'Tidak Setuju') typeClass = ' polling-choice-tidak';
-    else if (label === 'Abstain') typeClass = ' polling-choice-abstain';
-
-    return '<button class="polling-choice' + typeClass + '" type="button" ' + (disabled ? 'disabled' : '') + ' onclick="submitPollingChoice(\'' + label + '\')"><i class="' + icon + '"></i><span>' + label + '</span></button>';
-  }
-
-  function submitPollingChoice(answer) {
-    if (!currentPolling || !currentPolling.poll) return;
-    selectedPollingChoice = answer;
-    const confirmText = document.getElementById('pollingConfirmText');
-    if (confirmText) {
-      confirmText.innerHTML = 'Anda <b>' + escapeHtml(answer.toUpperCase()) + '</b> dengan rencana/kebijakan RT?';
-    }
-    openPollingModal('pollingConfirmModal');
-  }
-
-  function confirmSubmitPollingChoice() {
-    if (!currentPolling || !currentPolling.poll || !selectedPollingChoice) return;
-    const answer = selectedPollingChoice;
-    callAPI('pollingvote', { nik: currentUser.nik, pollId: currentPolling.poll.id, jawaban: answer }, function(res) {
-      if (res && res.success) {
-        closePollingModal('pollingConfirmModal');
-        closePollingModal('pollingUserModal');
-        loadPollingStatus(false);
-      } else {
-        closePollingModal('pollingConfirmModal');
-        showPollingToast(res && res.message ? res.message : 'Pendapat gagal disimpan.');
-      }
-    }, function() {
-      closePollingModal('pollingConfirmModal');
-      showPollingToast('Terjadi kesalahan koneksi saat menyimpan pendapat.');
-    });
-  }
-
-  function renderPollingResult(counts, total) {
-    const agree = Number(counts.Setuju || 0), disagree = Number(counts['Tidak Setuju'] || 0), abstain = Number(counts.Abstain || 0);
-    const safeTotal = agree + disagree + abstain;
-    const base = safeTotal || 1;
-    const p1 = agree / base * 100;
-    const p2 = (agree + disagree) / base * 100;
-    const p3 = (agree + disagree + abstain) / base * 100;
-    const pie = 'conic-gradient(#22c55e 0% ' + p1 + '%, #ef4444 ' + p1 + '% ' + p2 + '%, #94a3b8 ' + p2 + '% ' + p3 + '%)';
-    return '<div class="polling-result-title">Hasil Polling</div>' +
-      '<div class="polling-pie-wrap"><div class="polling-pie" style="background:' + pie + ';"></div></div>' +
-      '<div class="polling-legend">' +
-      pollingLegend('Setuju',agree,safeTotal,'#22c55e') +
-      pollingLegend('Tidak Setuju',disagree,safeTotal,'#ef4444') +
-      pollingLegend('Abstain',abstain,safeTotal,'#94a3b8') +
-      '</div><div class="polling-note" style="text-align:center;margin-top:10px;">Total pendapat: ' + safeTotal + '</div>';
-  }
-
-  function pollingLegend(label,count,total,color) {
-    const percent = total ? (count / total * 100) : 0;
-    return '<div class="polling-legend-row"><span class="polling-legend-left"><span class="polling-dot" style="background:' + color + '"></span>' + label + '</span><b>' + count + ' (' + percent.toFixed(1) + '%)</b></div>';
-  }
-
-  function formatPollingDate(value) {
-    const d = new Date(value);
-    if (isNaN(d.getTime())) return value;
-    return d.toLocaleString('id-ID', { day:'2-digit', month:'long', year:'numeric', hour:'2-digit', minute:'2-digit' });
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const desc = document.getElementById('pollingDescription');
-    if (desc) desc.addEventListener('input', updatePollingCharCount);
-    ['pollingAdminModal','pollingUserModal','pollingConfirmModal'].forEach(function(id) {
-      const el = document.getElementById(id);
-      if (el) el.addEventListener('click', function(e) { if (e.target === el) closePollingModal(id); });
-    });
   });
+  currentItem.classList.toggle('active');
+  setTimeout(() => {
+    if (chartGender) chartGender.resize();
+    if (chartPrioritas) chartPrioritas.resize();
+    if (chartPendidikan) chartPendidikan.resize();
+  }, 300);
+}
 
-  // ==========================================================
-  // MENU LAINNYA
-  // ==========================================================
-  function toggleOtherFeatures() {
-    const menu =
-      document.getElementById('otherFeaturesMenu');
-    const icon =
-      document.getElementById('otherFeaturesIcon');
-    const text =
-      document.getElementById('otherFeaturesText');
-    const isOpen =
-      menu.classList.toggle('show');
-    icon.classList.toggle('open');
-    text.textContent =
-      isOpen
-        ? 'Sembunyikan'
-        : 'Lainnya';
+// Fungsi pembantu untuk mengubah teks string menjadi angka secara aman
+function cleanNumber(val) {
+  if (val === null || val === undefined) return 0;
+  const str = String(val).trim();
+  if (str === "") return 0;
+  const num = Number(str.replace(/[^0-9.-]+/g, ""));
+  return isNaN(num) ? 0 : num;
+}
+
+const API_URL =
+  'https://script.google.com/macros/s/AKfycbzUSsFLjLO31A84Az13zVa2khU3r-HHBW6jYZFKLpfMr2kdz1icy9xb2Y6lfEUIAQG3/exec';
+
+function fetchSheetData() {
+  fetch(API_URL + '?api=rekap')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('HTTP ' + response.status);
+      }
+      return response.json();
+    })
+    .then(response => {
+      renderData(response);
+    })
+    .catch(error => {
+      console.error(
+        'Gagal mengambil data:',
+        error
+      );
+      document.getElementById(
+        'lastSync'
+      ).innerText = 'Gagal Sync';
+    });
+}
+
+function renderData(response) {
+  if (!response) {
+    document.getElementById('lastSync').innerText = 'Respon Kosong';
+    return;
+  }
+  
+  if (!response.success) {
+    console.error("Error Apps Script:", response.message);
+    document.getElementById('lastSync').innerText = 'Err: ' + (response.message || 'Gagal');
+    return;
+  }
+  
+  if (!response.data || response.data.length <= 1) {
+    document.getElementById('lastSync').innerText = 'Data Kosong';
+    return;
   }
 
-  // ==========================================================
-  // INISIALISASI
-  // ==========================================================
-  setFormattedHeaderDate();
-  document.addEventListener(
-    'DOMContentLoaded',
-    function() {
-      loadProfilRTGallery();
-      loadStandarPelayananGallery();
-      loadLoginHeaderImage();
+  document.getElementById('lastSync').innerText = 'Sync: ' + response.updatedAt;
+  
+  const rows = response.data;
+  let totalKK = 0;
+  let totalJiwa = 0;
+  let genderLabels = [], genderData = [];
+  let statusList = [];
+  let prioritasLabels = [], prioritasData = [];
+  let penerimaList = [];
+  let pendidikanLabels = [], pendidikanData = [];
+
+  for (let i = 1; i < rows.length; i++) {
+    const r = rows[i];
+    if (!r) continue;
+
+    const kkVal = cleanNumber(r[1]);
+    const jiwaVal = cleanNumber(r[2]);
+
+    totalKK += kkVal;
+    totalJiwa += jiwaVal;
+
+    // Rincian Status Domisili (Kolom A, B, C)
+    if (r[0] && String(r[0]).trim() !== "") {
+      statusList.push({ status: String(r[0]), kk: kkVal, jiwa: jiwaVal });
     }
-  );
-
-  // ==========================================================
-  // LOGOUT
-  // ==========================================================
-  function logout() {
-    currentUser = {
-      nik: '',
-      nama: '',
-      gender: '',
-      visitorCount: 1,
-      isAdmin: false,
-      isDatabaseUser: false
-    };
-    document.getElementById('nikInput').value = '';
-    document.getElementById('loginError').style.display = 'none';
-    document.getElementById('dashboardView').style.display = 'none';
-    document.getElementById('bottomNavbar').style.display = 'none';
-    document.getElementById('loginView').style.display = 'flex';
-    closeAppPage(true);
-    toggleSidebar(false);
-    closePollingModal('pollingAdminModal');
-    closePollingModal('pollingUserModal');
-    closePollingModal('pollingConfirmModal');
-    currentPolling = null;
-    currentPollingAdminId = '';
+    // Gender (Kolom D, E)
+    if (r[3] && String(r[3]).trim() !== "") {
+      genderLabels.push(String(r[3]));
+      genderData.push(cleanNumber(r[4]));
+    }
+    // Pendidikan (Kolom F, G)
+    if (r[5] && String(r[5]).trim() !== "") {
+      pendidikanLabels.push(String(r[5]));
+      pendidikanData.push(cleanNumber(r[6]));
+    }
+    // Warga Prioritas (Kolom H, I)
+    if (r[7] && String(r[7]).trim() !== "") {
+      prioritasLabels.push(String(r[7]));
+      prioritasData.push(cleanNumber(r[8]));
+    }
+    // Penerima Manfaat (Kolom J, K)
+    if (r[9] && String(r[9]).trim() !== "") {
+      penerimaList.push({ kategori: String(r[9]), jumlah: cleanNumber(r[10]) });
+    }
   }
+
+  totalKKGlobal = totalKK > 0 ? totalKK : 1;
+  document.getElementById('valKK').innerText = totalKK.toLocaleString('id-ID');
+  document.getElementById('valJiwa').innerText = totalJiwa.toLocaleString('id-ID');
+
+  renderGenderChart(genderLabels, genderData);
+  renderStatusTable(statusList);
+  renderPrioritasChart(prioritasLabels, prioritasData);
+  renderPenerimaManfaat(penerimaList);
+  renderPendidikanChart(pendidikanLabels, pendidikanData);
+}
+
+function renderGenderChart(labels, data) {
+  const ctx = document.getElementById('genderChart').getContext('2d');
+  if (chartGender) {
+    chartGender.data.labels = labels;
+    chartGender.data.datasets[0].data = data;
+    chartGender.update();
+    return;
+  }
+  chartGender = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: data,
+        backgroundColor: ['#00529C', '#FF6B00', '#1072BA', '#EC4899'],
+        borderWidth: 2,
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right', labels: { font: { family: 'Plus Jakarta Sans', size: 11 } } },
+        datalabels: {
+          color: '#ffffff',
+          font: { family: 'Plus Jakarta Sans', weight: 'bold', size: 12 },
+          formatter: (value) => value > 0 ? value.toLocaleString('id-ID') : ''
+        }
+      }
+    }
+  });
+}
+
+function renderStatusTable(list) {
+  const tbody = document.getElementById('tableStatusBody');
+  if (list.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;">Data tidak tersedia</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list.map(item => `
+    <tr>
+      <td><strong>${item.status}</strong></td>
+      <td style="text-align: right; font-weight: 700; color: var(--bri-blue);">${Number(item.kk).toLocaleString('id-ID')}</td>
+      <td style="text-align: right; font-weight: 700; color: var(--bri-green);">${Number(item.jiwa).toLocaleString('id-ID')}</td>
+    </tr>
+  `).join('');
+}
+
+function renderPrioritasChart(labels, data) {
+  const ctx = document.getElementById('prioritasChart').getContext('2d');
+  if (chartPrioritas) {
+    chartPrioritas.data.labels = labels;
+    chartPrioritas.data.datasets[0].data = data;
+    chartPrioritas.update();
+    return;
+  }
+  chartPrioritas = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Jumlah Warga',
+        data: data,
+        backgroundColor: '#FF6B00',
+        borderRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end',
+          align: 'top',
+          color: '#1E293B',
+          font: { family: 'Plus Jakarta Sans', weight: 'bold', size: 11 },
+          formatter: (value) => value.toLocaleString('id-ID')
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { precision: 0 },
+          grace: '18%'
+        }
+      }
+    }
+  });
+}
+
+function renderPenerimaManfaat(list) {
+  const container = document.getElementById('penerimaList');
+  if (list.length === 0) {
+    container.innerHTML = '<p class="text-muted" style="font-size: 12px;">Data tidak tersedia</p>';
+    return;
+  }
+  container.innerHTML = list.map(item => {
+    const percentage = ((item.jumlah / totalKKGlobal) * 100).toFixed(1);
+    return `
+      <div class="benefit-item">
+        <div class="benefit-title">
+          <i class="fa-solid fa-ribbon" style="color: var(--bri-blue);"></i>
+          <span>${item.kategori}</span>
+        </div>
+        <div class="benefit-metrics">
+          <span class="badge-count">${item.jumlah} KK</span>
+          <span class="badge-percent">${percentage}% KK</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderPendidikanChart(labels, data) {
+  const ctx = document.getElementById('pendidikanChart').getContext('2d');
+  if (chartPendidikan) {
+    chartPendidikan.data.labels = labels;
+    chartPendidikan.data.datasets[0].data = data;
+    chartPendidikan.update();
+    return;
+  }
+  chartPendidikan = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Jumlah Warga',
+        data: data,
+        backgroundColor: '#00529C',
+        borderRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end',
+          align: 'top',
+          color: '#1E293B',
+          font: { family: 'Plus Jakarta Sans', weight: 'bold', size: 11 },
+          formatter: (value) => value.toLocaleString('id-ID')
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { precision: 0 },
+          grace: '18%'
+        }
+      }
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  fetchSheetData();
+  setInterval(fetchSheetData, 10000);
+});
 </script>
 </body>
 </html>
