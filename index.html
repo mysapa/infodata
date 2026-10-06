@@ -372,20 +372,14 @@ body {
 
 /* Footer */
 .app-footer {
-  text-align: center;
-  padding: 24px 16px 10px 16px;
-  font-size: 10px;
-  color: var(--text-muted);
+ margin-top: 0px;
+ padding: 12px 20px;
+ text-align: center;
+ border-top: none;
+ background: none;
 }
-.footer-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-weight: 700;
-  color: var(--bri-navy);
-  margin-bottom: 2px;
-}
-
+.footer-copy { font-size: 12px; color: #808080; font-weight: 400; }
+  
 /* Responsive Grid & Inner Grid Constraints */
 .inner-grid-2col {
   display: grid;
@@ -579,14 +573,12 @@ body {
     </div>
   </div>
 
-  <!-- App Footer -->
-  <div class="app-footer">
-    <div class="footer-logo">
-      <i class="fa-solid fa-shield-halved" style="color: var(--bri-blue);"></i> MySAPA
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-copy">
+      Powered by <strong>Anto</strong> Design Concept &copy; 2026
     </div>
-    <div>Sistem Informasi & Pelayanan Administrasi</div>
-    <div style="margin-top: 3px; opacity: 0.7;">Powered by Anto Design Concept &copy; 2026</div>
-  </div>
+  </footer>
 </div>
 
 <script>
